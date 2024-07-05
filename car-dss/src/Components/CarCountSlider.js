@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
@@ -10,12 +9,12 @@ import FormControl from '@mui/material/FormControl';
     return `${value}°C`;
   }
 
-export default function CarCountSlider() {
-  const [value, setValue] = React.useState(0);
-
+export default function CarCountSlider(props) {
+  
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
-      setValue(newValue);
+      props.handle(newValue);
+      console.log(newValue);
     }
   };
 
@@ -32,6 +31,7 @@ export default function CarCountSlider() {
         max={5}
         valueLabelDisplay="auto"
         helperText="Number of Cars to Recommend"
+        onChange={handleChange}
       />
     </Box>
     <FormHelperText id="outlined-weight-helper-text">Number of Cars to Recommend</FormHelperText>

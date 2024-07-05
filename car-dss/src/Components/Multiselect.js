@@ -1,12 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Checkbox from '@mui/material/Checkbox';
-import ListItemText from '@mui/material/ListItemText';
 import { useTheme } from '@mui/material/styles';
 
 const ITEM_HEIGHT = 48;
@@ -32,8 +29,6 @@ function getStyles(name, selectedOptions, theme) {
 
 export default function Multiselect(props) {
   const theme = useTheme();
-  const [selectedOptions, setSelectedOptions] = React.useState([]);
-
 
   const handleChange = (event) => {
     const {
@@ -54,7 +49,7 @@ export default function Multiselect(props) {
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
-          value={selectedOptions}
+          value={props.selected}
           onChange={handleChange}
           MenuProps={MenuProps}
           input={<OutlinedInput label="Name" />}
@@ -63,7 +58,7 @@ export default function Multiselect(props) {
             <MenuItem
               key={option}
               value={option}
-              style={getStyles(option, selectedOptions, theme)}
+              style={getStyles(option, props.selected, theme)}
             >
               {option}
             </MenuItem>
