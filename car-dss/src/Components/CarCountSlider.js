@@ -2,6 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 
 
   function valuetext(value) {
@@ -18,6 +20,7 @@ export default function CarCountSlider() {
   };
 
   return (
+    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
     <Box sx={{ width: 300 }}>
       <Slider
         aria-label="Small steps"
@@ -28,7 +31,10 @@ export default function CarCountSlider() {
         min={1}
         max={5}
         valueLabelDisplay="auto"
+        helperText="Number of Cars to Recommend"
       />
     </Box>
+    <FormHelperText id="outlined-weight-helper-text">Number of Cars to Recommend</FormHelperText>
+    </FormControl>
   );
 }
