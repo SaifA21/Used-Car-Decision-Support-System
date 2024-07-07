@@ -24,6 +24,26 @@ function Input() {
   const cylinders = ["two", "three", "four", "five", "six", "eight"]
   const budgets = ["5000-10000", "10000-15000", "15000-20000", "20000-25000", "25000-30000", "30000+"]
   const sizes = ["Smaller", "Medium", "Larger"]
+
+  const callApiTest = async () => {
+
+    const url = "/api/test";
+    const response = await fetch(url, {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify()
+    
+    });
+    const body = await response.json;
+    
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  
+  }
+
+  callApiTest();
   
   return (
     <div>
