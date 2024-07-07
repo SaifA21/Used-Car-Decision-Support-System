@@ -1,6 +1,5 @@
 let mysql = require('mysql');
 let config = require('./config.js');
-const fetch = require('node-fetch');
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -12,6 +11,10 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(express.static(path.join(__dirname, "client/build")));
+
+
+
+
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); //for the dev version
