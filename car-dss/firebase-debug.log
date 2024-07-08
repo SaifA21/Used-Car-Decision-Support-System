@@ -1,0 +1,72 @@
+[debug] [2024-07-08T03:52:35.132Z] ----------------------------------------------------------------------
+[debug] [2024-07-08T03:52:35.134Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Saif\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-07-08T03:52:35.134Z] CLI Version:   13.13.0
+[debug] [2024-07-08T03:52:35.135Z] Platform:      win32
+[debug] [2024-07-08T03:52:35.135Z] Node Version:  v20.4.0
+[debug] [2024-07-08T03:52:35.135Z] Time:          Sun Jul 07 2024 23:52:35 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-07-08T03:52:35.135Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-08T03:52:35.191Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-08T03:52:35.192Z] > authorizing via signed-in user (contact.saifa@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Saif\Documents\GitHub\MSCI-436-DSS\car-dss
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-07-08T03:52:43.408Z] Using project from CLI flag: car-dss-1a454
+[debug] [2024-07-08T03:52:43.409Z] > refreshing access token with scopes: []
+[debug] [2024-07-08T03:52:43.411Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-07-08T03:52:43.411Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-08T03:52:43.558Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-07-08T03:52:43.558Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-08T03:52:43.564Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/car-dss-1a454 [none]
+[debug] [2024-07-08T03:52:43.944Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/car-dss-1a454 200
+[debug] [2024-07-08T03:52:43.944Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/car-dss-1a454 {"projectId":"car-dss-1a454","projectNumber":"764851713340","displayName":"Car-DSS","name":"projects/car-dss-1a454","resources":{"hostingSite":"car-dss-1a454","realtimeDatabaseInstance":"car-dss-1a454-default-rtdb"},"state":"ACTIVE","etag":"1_b6e7d7bc-4a9c-41b9-80e7-fdd307836bf1"}
+[info] i  Using project car-dss-1a454 (Car-DSS) 
+[info] 
+=== Functions Setup
+[debug] [2024-07-08T03:52:43.949Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-08T03:52:43.949Z] > authorizing via signed-in user (contact.saifa@gmail.com)
+[debug] [2024-07-08T03:52:43.949Z] [iam] checking project car-dss-1a454 for permissions ["firebase.projects.get"]
+[debug] [2024-07-08T03:52:43.949Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/car-dss-1a454:testIamPermissions [none]
+[debug] [2024-07-08T03:52:43.949Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/car-dss-1a454:testIamPermissions x-goog-quota-user=projects/car-dss-1a454
+[debug] [2024-07-08T03:52:43.949Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/car-dss-1a454:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-07-08T03:52:44.210Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/car-dss-1a454:testIamPermissions 200
+[debug] [2024-07-08T03:52:44.210Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/car-dss-1a454:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-07-08T03:52:44.210Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-07-08T03:52:44.211Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/car-dss-1a454
+[debug] [2024-07-08T03:52:44.212Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-07-08T03:52:44.212Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/car-dss-1a454
+[debug] [2024-07-08T03:52:44.685Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/runtimeconfig.googleapis.com 200
+[debug] [2024-07-08T03:52:44.685Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-07-08T03:52:44.689Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/cloudfunctions.googleapis.com 200
+[debug] [2024-07-08T03:52:44.689Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/car-dss-1a454/services/cloudfunctions.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
