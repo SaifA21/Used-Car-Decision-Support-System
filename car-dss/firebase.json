@@ -1,7 +1,21 @@
 {
-  "functions": {
-    "source": "functions"
-  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default"
+    },
+    {
+      "source": "python",
+      "codebase": "python",
+      "ignore": [
+        "venv",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
   "database": {
     "rules": "database.rules.json"
   },
@@ -23,6 +37,10 @@
       {
         "source": "/api/**",
         "function": "app"
+      },
+      {
+        "source": "/python/process",
+        "function": "process"
       }
     ]
   }
