@@ -1,8 +1,10 @@
 import Slider from '../CarCountSlider';
 import { Typography } from '@mui/material';
+import {Card, CardActions, CardContent, Grid, Button, Select, MenuItem, FormControl, InputLabel, TextField, Radio, FormLabel, RadioGroup, FormControlLabel, FormHelperText, CssBaseline} from "@mui/material";
 import Multiselect from '../Multiselect'
 import IntegerInput from '../IntegerInput'
 import * as React from 'react'
+import './Input.css'
 
 function Input() {
   
@@ -43,28 +45,82 @@ function Input() {
   
   }
 
-  callApiTest();
+  //callApiTest();
   
   return (
-    <div>
+    <div className='background'>
+      <div className='Title'>
+              <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}}>
+              <Typography variant="h2" gutterBottom>
+                Decision Support System - Car Support
+              </Typography> 
+              </Card>
 
-      <Typography variant="h4" gutterBottom>
-        Car DSS
-      </Typography> 
+            </div>
+            <div className='Slider'>
+            <Card style={{color: 'black', backgroundColor: '#DDDDDD', height: "auto", borderRadius: "100px"}}>
+            <Typography variant="h4" gutterBottom>
+                How many cars should we recommend? 
+              </Typography> 
+              <Slider handle={setNumberOfRecommendations}></Slider>
+              </Card>
+            </div>
+            <div className='SelectOptions'>
+            <Card style={{color: 'black', backgroundColor: '#DDDDDD', height: "auto", borderRadius: "100px"}}>
+            <Typography variant="h4" gutterBottom>
+                What features do you want in your ride? 
+              </Typography> 
+            <Grid container direction="row" justifyContent="center">
+            <Grid item xs={3}>
+              <div>
+              <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect> 
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Fuel Type" options={fuels} handle={setselectedFuel} selected={selectedFuel}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Car Body Styles" options={bodyStyles} handle={setselectedBody} selected={selectedBody}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Drivetrain Type" options={drivetrain} handle={setselectedDrivetrain} selected={selectedDrivetrain}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Number of Cylinders" options={cylinders}handle={setselectedCylinders} selected={selectedCylinders}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Budget" options={budgets} handle={setselectedBudget} selected={selectedBudget}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <Multiselect label="Car Size" options={sizes} handle={setselectedCarsize} selected={selectedCarsize}></Multiselect>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <IntegerInput label="City MPG" handle={setCityMpg} selected={cityMpg}></IntegerInput>
+              </div>              
+              </Grid>
+              <Grid item xs={3}>
+              <div>
+              <IntegerInput label="Highway MPG" handle={setHwyMpg} selected={hwyMpg}></IntegerInput>
+              </div>              
+              </Grid>
+            </Grid>
+            <Button>Submit</Button>
 
-      <Slider handle={setNumberOfRecommendations}></Slider>
-
-      <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect>
-      <Multiselect label="Fuel Type" options={fuels} handle={setselectedFuel} selected={selectedFuel}></Multiselect>
-      <Multiselect label="Car Body Styles" options={bodyStyles} handle={setselectedBody} selected={selectedBody}></Multiselect>
-      <Multiselect label="Drivetrain Type" options={drivetrain} handle={setselectedDrivetrain} selected={selectedDrivetrain}></Multiselect>
-      <Multiselect label="Number of Cylinders" options={cylinders}handle={setselectedCylinders} selected={selectedCylinders}></Multiselect>
-      <Multiselect label="Budget" options={budgets} handle={setselectedBudget} selected={selectedBudget}></Multiselect>
-      <Multiselect label="Car Size" options={sizes} handle={setselectedCarsize} selected={selectedCarsize}></Multiselect>
-      <IntegerInput label="City MPG" handle={setCityMpg} selected={cityMpg}></IntegerInput>
-      <IntegerInput label="Highway MPG" handle={setHwyMpg} selected={hwyMpg}></IntegerInput>
-      
-      
+            </Card>
+            </div>
     </div>
   );
 }

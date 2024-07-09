@@ -1,0 +1,20 @@
+.Title {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.Slider {
+    text-align: center;
+    margin-block: 20px;
+}
+
+.background {
+    background-color: black;
+    height: 1000px;
+}
+
+.SelectOptions {
+    text-align: center;
+    margin-block: 20px;
+}
