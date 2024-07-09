@@ -79,7 +79,7 @@ function Input() {
             </div>
             <div className='Slider' justifyContent='center'>
             <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: '70%', borderRadius: "100px"}}>
-            <Typography variant="h4" gutterBottom style={{marginBlock: '1vh'}}>
+            <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
                 How many cars should we recommend? 
               </Typography> 
               <Slider handle={setNumberOfRecommendations}></Slider>
@@ -87,10 +87,10 @@ function Input() {
             </div>
             <div className='SelectOptions'>
             <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "100px"}}>
-            <Typography variant="h4" gutterBottom style={{marginBlock: '1vh'}}>
+            <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
                 What features do you want in your ride? 
               </Typography> 
-            <Grid container direction="row" justifyContent="center">
+            <Grid container direction="row" justifyContent="center" style={{marginBlock: '25px'}}>
             <Grid item xs={4}>
               <div>
               <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect> 
@@ -152,7 +152,7 @@ function Input() {
               </div>              
               </Grid>
             </Grid>
-            <Button variant='contained' onClick={() => {callApiTest()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBlock: '4vh'}}>Submit</Button>
+            <Button variant='contained' onClick={() => {callApiTest()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBlock: '3vh'}}>Submit</Button>
 
             </Card>
             </div>
