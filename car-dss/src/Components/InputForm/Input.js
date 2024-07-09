@@ -58,7 +58,7 @@ function Input() {
 
             </div>
             <div className='Slider'>
-            <Card style={{color: 'black', backgroundColor: '#DDDDDD', height: "auto", borderRadius: "100px"}}>
+            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", borderRadius: "100px"}}>
             <Typography variant="h4" gutterBottom>
                 How many cars should we recommend? 
               </Typography> 
@@ -66,7 +66,7 @@ function Input() {
               </Card>
             </div>
             <div className='SelectOptions'>
-            <Card style={{color: 'black', backgroundColor: '#DDDDDD', height: "auto", borderRadius: "100px"}}>
+            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", borderRadius: "100px"}}>
             <Typography variant="h4" gutterBottom>
                 What features do you want in your ride? 
               </Typography> 
