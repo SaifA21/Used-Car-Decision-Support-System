@@ -50,74 +50,74 @@ function Input() {
   return (
     <div className='background'>
       <div className='Title'>
-              <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}}>
-              <Typography variant="h2" gutterBottom>
+              <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
+              <Typography variant="h2" gutterBottom align="center">
                 Decision Support System - Car Support
               </Typography> 
               </Card>
 
             </div>
-            <div className='Slider'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", borderRadius: "100px"}}>
-            <Typography variant="h4" gutterBottom>
+            <div className='Slider' justifyContent='center'>
+            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: '70%', borderRadius: "100px"}}>
+            <Typography variant="h4" gutterBottom style={{marginBlock: '1vh'}}>
                 How many cars should we recommend? 
               </Typography> 
               <Slider handle={setNumberOfRecommendations}></Slider>
               </Card>
             </div>
             <div className='SelectOptions'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", borderRadius: "100px"}}>
-            <Typography variant="h4" gutterBottom>
+            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "100px"}}>
+            <Typography variant="h4" gutterBottom style={{marginBlock: '1vh'}}>
                 What features do you want in your ride? 
               </Typography> 
             <Grid container direction="row" justifyContent="center">
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <div>
               <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect> 
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Fuel Type" options={fuels} handle={setselectedFuel} selected={selectedFuel}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Car Body Styles" options={bodyStyles} handle={setselectedBody} selected={selectedBody}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Drivetrain Type" options={drivetrain} handle={setselectedDrivetrain} selected={selectedDrivetrain}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Number of Cylinders" options={cylinders}handle={setselectedCylinders} selected={selectedCylinders}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Budget" options={budgets} handle={setselectedBudget} selected={selectedBudget}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <Multiselect label="Car Size" options={sizes} handle={setselectedCarsize} selected={selectedCarsize}></Multiselect>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <IntegerInput label="City MPG" handle={setCityMpg} selected={cityMpg}></IntegerInput>
               </div>              
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
               <div>
               <IntegerInput label="Highway MPG" handle={setHwyMpg} selected={hwyMpg}></IntegerInput>
               </div>              
               </Grid>
             </Grid>
-            <Button>Submit</Button>
+            <Button variant='contained' style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBlock: '4vh'}}>Submit</Button>
 
             </Card>
             </div>

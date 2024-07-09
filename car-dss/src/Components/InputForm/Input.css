@@ -7,14 +7,31 @@
 .Slider {
     text-align: center;
     margin-block: 20px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .background {
-    background-color: black;
-    height: 1000px;
+    content: "";
+    position: fixed;
+    background: grey url(../../Images/BMW.jpg) center center no-repeat;
+    background-size: cover;
+    opacity: 1;
+    height: 100vh;
+    z-index: -1;
+    min-height: 100vh;
+    background-repeat: "no-repeat";
+    border-color: "white";
+    right: 0;
+    top: 0;
+    left: 0;
 }
 
 .SelectOptions {
     text-align: center;
     margin-block: 20px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
 }
