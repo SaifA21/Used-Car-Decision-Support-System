@@ -152,7 +152,7 @@ function Input() {
               </div>              
               </Grid>
             </Grid>
-            <Button variant='contained' onClick={() => {callApiTest()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBlock: '3vh'}}>Submit</Button>
+            <Button variant='contained' onClick={() => {callApiTest()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBottom: '3vh'}}>Submit</Button>
 
             </Card>
             </div>
