@@ -1,10 +1,12 @@
 # Import the necessary modules
 import json
-from flask import Flask, request
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
+from flask import Flask, request
 import numpy as np
+import pandas as pd
 from sklearn.linear_model import LinearRegression
+
 
 # Initialize the Firebase app
 initialize_app()
@@ -20,6 +22,11 @@ def process(req: https_fn.Request) -> https_fn.Response:
 
         if not x or not y:
             return https_fn.Response("Invalid input data", status=400)
+        
+        data_file = "data.csv"
+        data_df = pd.read_csv(data_file)
+
+        test = data_df.head()
 
         # Convert x and y to numpy arrays and reshape x for sklearn
         x_np = np.array(x).reshape(-1, 1)
@@ -40,3 +47,15 @@ def process(req: https_fn.Request) -> https_fn.Response:
     except Exception as e:
         # Handle unexpected errors
         return https_fn.Response(f"An error occurred: {str(e)}", status=500)
+
+if __name__ == "__main__":
+    # If you need to run the app locally for testing purposes
+    app = Flask(__name__)
+
+    @app.route('/process', methods=['POST'])
+    def test():
+        # Call the function as it would be called by Firebase
+        response = process(request)
+        return response.data, response.status_code, response.headers
+
+    app.run(debug=True)
