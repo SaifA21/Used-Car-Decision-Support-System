@@ -9,22 +9,21 @@ import { useTheme } from '@mui/material/styles';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
     },
-  };
+  },
+};
 
-  
 function getStyles(name, selectedOptions, theme) {
-    return {
-      fontWeight:
+  return {
+    fontWeight:
       selectedOptions.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
 }
 
 export default function Multiselect(props) {
@@ -40,7 +39,6 @@ export default function Multiselect(props) {
     );
   };
 
-
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -51,8 +49,8 @@ export default function Multiselect(props) {
           multiple
           value={props.selected}
           onChange={handleChange}
+          input={<OutlinedInput label={props.label} />}
           MenuProps={MenuProps}
-          input={<OutlinedInput label="Name" />}
         >
           {props.options.map((option) => (
             <MenuItem
