@@ -12,9 +12,9 @@ function App() {
     <div>
     <Router>
         <Routes>
-          <Route path="/Search" Component={Input} />
-          <Route path="/History" Component={ViewHistory} />
-          <Route path="*" element={<Navigate replace to="/Search" />} />
+          <Route path="/page/search" Component={Input} />
+          <Route path="/page/history" Component={ViewHistory} />
+          <Route path="*" element={<Navigate replace to="/page/search" />} />
       </Routes>
     </Router>
       
