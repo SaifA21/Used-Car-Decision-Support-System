@@ -5,10 +5,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 
 
-  function valuetext(value) {
-    return `${value}°C`;
-  }
-
 export default function CarCountSlider(props) {
   
   const handleChange = (event, newValue) => {
@@ -20,11 +16,10 @@ export default function CarCountSlider(props) {
 
   return (
     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 250 }}>
       <Slider
-        aria-label="Small steps"
+        aria-label="Number of cars to recommend"
         defaultValue={1}
-        getAriaValueText={valuetext}
         step={1}
         marks
         min={1}

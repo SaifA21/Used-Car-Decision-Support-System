@@ -1,24 +1,25 @@
 import Slider from '../CarCountSlider';
 import { Typography } from '@mui/material';
-import {Card, CardActions, CardContent, Grid, Button, Select, MenuItem, FormControl, InputLabel, TextField, Radio, FormLabel, RadioGroup, FormControlLabel, FormHelperText, CssBaseline} from "@mui/material";
+import {Card, Grid, Button} from "@mui/material";
 import Multiselect from '../Multiselect'
 import IntegerInput from '../IntegerInput'
 import * as React from 'react'
 import './Input.css'
+import Navbar from '../Navbar';
 
 function Input() {
   
   const [numberOfRecommendations, setNumberOfRecommendations] = React.useState()
   const [selectedDoors, setSelectedDoors] = React.useState([])
-  const [selectedFuel, setselectedFuel] = React.useState([])
-  const [selectedBody, setselectedBody] = React.useState([])
-  const [selectedDrivetrain, setselectedDrivetrain] = React.useState([])
-  const [selectedCylinders, setselectedCylinders] = React.useState([])
-  const [selectedBudget, setselectedBudget] = React.useState([])
-  const [selectedCarsize, setselectedCarsize] = React.useState([])
-  const [selectedMake, setselectedMake] = React.useState([])
-  const [selectedYear, setselectedYear] = React.useState([])
-  const [selectedTrans, setselectedTrans] = React.useState([])
+  const [selectedFuel, setSelectedFuel] = React.useState([])
+  const [selectedBody, setSelectedBody] = React.useState([])
+  const [selectedDrivetrain, setSelectedDrivetrain] = React.useState([])
+  const [selectedCylinders, setSelectedCylinders] = React.useState([])
+  const [selectedBudget, setSelectedBudget] = React.useState([])
+  const [selectedCarsize, setSelectedCarsize] = React.useState([])
+  const [selectedMake, setSelectedMake] = React.useState([])
+  const [selectedYear, setSelectedYear] = React.useState([])
+  const [selectedTrans, setSelectedTrans] = React.useState([])
   const [cityMpg, setCityMpg] = React.useState()
   const [hwyMpg, setHwyMpg] = React.useState()
 
@@ -37,15 +38,15 @@ function Input() {
     "Maybach", "Mazda", "McLaren", "Mercedes-Benz", "Mitsubishi", "Nissan", 
     "Oldsmobile", "Plymouth", "Pontiac", "Porsche", "Rolls-Royce", "Saab", 
     "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
-];  
-    const year = [
-  "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999",
-  "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
-  "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"
-];  
-    const trans = ["Automatic", "Manual"]
-
-
+  ];  
+  
+  const year = [
+    "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999",
+    "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
+    "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"
+  ];  
+  
+  const trans = ["Automatic", "Manual"]
 
   const callApiTest = async () => {
 
@@ -70,92 +71,91 @@ function Input() {
   return (
     <div className='background'>
       <div className='Title'>
-              <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
-              <Typography variant="h2" gutterBottom align="center">
-                Decision Support System - Car Support
-              </Typography> 
-              </Card>
+        <Navbar></Navbar>
 
-            </div>
-            <div className='Slider' justifyContent='center'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: '70%', borderRadius: "100px"}}>
+        <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
+          <Typography variant="h2" gutterBottom align="center">
+              Car Search - Find a Car
+          </Typography> 
+        </Card>
+        </div>
+          
+        <div className='Slider' style={{display: "flex", justifyContent: 'center', mb:2}}>
+          <Card sx={{color: 'black', backgroundColor: 'white', p: 3, width: '70%', borderRadius: "16px"}}>
+            <Typography variant="h4" gutterBottom >
+              How many cars should we recommend? 
+            </Typography> 
+            <Slider handle={setNumberOfRecommendations}></Slider>
+          </Card>
+        </div>
+        
+        <div className='SelectOptions' style={{ display: 'flex', justifyContent: 'center' }}>
+          <Card sx={{color: 'black', backgroundColor: 'white', p: 3, width: "70%", borderRadius: "16px"}} align="center">
             <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
-                How many cars should we recommend? 
-              </Typography> 
-              <Slider handle={setNumberOfRecommendations}></Slider>
-              </Card>
-            </div>
-            <div className='SelectOptions'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "100px"}}>
-            <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
-                What features do you want in your ride? 
-              </Typography> 
-            <Grid container direction="row" justifyContent="center" style={{marginBlock: '25px'}}>
-            <Grid item xs={4}>
-              <div>
-              <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect> 
-              </div>              
+              What features do you want in your ride? 
+            </Typography> 
+            
+            <Grid container spacing={2} style={{ marginBlock: '25px' }}>
+              <Grid item xs={12} sm={6} md={4}>
+                  <Multiselect label="Number of Doors" options={doors} handle={setSelectedDoors} selected={selectedDoors}></Multiselect>              
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Fuel Type" options={fuels} handle={setselectedFuel} selected={selectedFuel}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Fuel Type" options={fuels} handle={setSelectedFuel} selected={selectedFuel}></Multiselect>
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Car Body Styles" options={bodyStyles} handle={setselectedBody} selected={selectedBody}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Car Body Styles" options={bodyStyles} handle={setSelectedBody} selected={selectedBody}></Multiselect>
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Drivetrain Type" options={drivetrain} handle={setselectedDrivetrain} selected={selectedDrivetrain}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Drivetrain Type" options={drivetrain} handle={setSelectedDrivetrain} selected={selectedDrivetrain}></Multiselect>
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Number of Cylinders" options={cylinders}handle={setselectedCylinders} selected={selectedCylinders}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Number of Cylinders" options={cylinders}handle={setSelectedCylinders} selected={selectedCylinders}></Multiselect>            
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Budget" options={budgets} handle={setselectedBudget} selected={selectedBudget}></Multiselect>
-              </div>              
+              
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Budget" options={budgets} handle={setSelectedBudget} selected={selectedBudget}></Multiselect>            
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Car Size" options={sizes} handle={setselectedCarsize} selected={selectedCarsize}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Car Size" options={sizes} handle={setSelectedCarsize} selected={selectedCarsize}></Multiselect>           
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Year" options={year} handle={setselectedYear} selected={selectedYear}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Year" options={year} handle={setSelectedYear} selected={selectedYear}></Multiselect>
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Make" options={make} handle={setselectedMake} selected={selectedMake}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Make" options={make} handle={setSelectedMake} selected={selectedMake}></Multiselect>           
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <Multiselect label="Transmission" options={trans} handle={setselectedTrans} selected={selectedTrans}></Multiselect>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Multiselect label="Transmission" options={trans} handle={setSelectedTrans} selected={selectedTrans}></Multiselect>
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <IntegerInput label="City MPG" handle={setCityMpg} selected={cityMpg}></IntegerInput>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <IntegerInput label="City MPG" handle={setCityMpg} selected={cityMpg}></IntegerInput>          
               </Grid>
-              <Grid item xs={4}>
-              <div>
-              <IntegerInput label="Highway MPG" handle={setHwyMpg} selected={hwyMpg}></IntegerInput>
-              </div>              
+
+              <Grid item xs={12} sm={6} md={4}>
+                <IntegerInput label="Highway MPG" handle={setHwyMpg} selected={hwyMpg}></IntegerInput>            
               </Grid>
+            
             </Grid>
-            <Button variant='contained' onClick={() => {callApiTest()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBottom: '3vh'}}>Submit</Button>
+            
+            <Button variant='contained' 
+              onClick={() => {callApiTest()}} 
+              style={{backgroundColor: '#4169e1', 
+              color: 'white', width: '40vh', height: '5vh', 
+              marginBottom: '3vh'}}>
+                Submit
+            </Button>
 
-            </Card>
-            </div>
+          </Card>
+        </div>
     </div>
   );
 }
