@@ -33,8 +33,8 @@ const card = (
         {'"a benevolent smile"'}
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
+    <CardActions style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <Button size="small" variant='contained' style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>Learn More</Button>
     </CardActions>
   </React.Fragment>
 );
