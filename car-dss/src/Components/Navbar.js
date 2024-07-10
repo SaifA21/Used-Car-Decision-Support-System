@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 
-const pages = ['Search', 'History'];
+const pages = ['search', 'history'];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -89,7 +89,7 @@ const Navbar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                  <Link style={{textDecoration: "none", color: 'black'}} to={`/${page}`}>
+                  <Link style={{textDecoration: "none", color: 'black'}} to={`/page/${page}`}>
                     {page}
                   </Link>
                   </Typography>
@@ -106,7 +106,7 @@ const Navbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link style={{textDecoration: "none", color: 'white'}} to={`/${page}`}>
+                <Link style={{textDecoration: "none", color: 'white'}} to={`/page/${page}`}>
                     {page}
                   </Link>
               </Button>

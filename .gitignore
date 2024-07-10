@@ -4,3 +4,5 @@ car-dss/src/firebase/firebase.js
 car-dss/functions/config.js
 *.pyc
 /car-dss/python/venv/Lib
+*.log
+*.cache
