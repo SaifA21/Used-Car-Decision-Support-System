@@ -5,6 +5,7 @@ import Multiselect from '../Multiselect'
 import IntegerInput from '../IntegerInput'
 import * as React from 'react'
 import './Input.css'
+import Navbar from '../Navbar';
 
 function Input() {
   
@@ -70,12 +71,13 @@ function Input() {
   return (
     <div className='background'>
       <div className='Title'>
+      <Navbar></Navbar>
+
               <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
               <Typography variant="h2" gutterBottom align="center">
-                Decision Support System - Car Support
+                Car Search - Find a Car
               </Typography> 
               </Card>
-
             </div>
             <div className='Slider' justifyContent='center'>
             <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: '70%', borderRadius: "100px"}}>
