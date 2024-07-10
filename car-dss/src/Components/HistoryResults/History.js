@@ -17,7 +17,18 @@ import Navbar from '../Navbar';
 function ViewHistory() {
   
   const [searchID, setSearchID] = React.useState()
-  const [results, setResults] = React.useState([])
+  const [results, setResults] = React.useState([
+      {Make: "BMW", Model: "1 Series", Year: 2011, Transmission: "MANUAL", 
+        Driven_Wheels: "rear wheel drive", Number_of_Doors: 2, Vehicle_Style: "Coupe",
+        city_mpg: 13, highway_MPG: 24
+      },
+      {Make: "Merc", Model: "C-Class", Year: 2014, Transmission: "AUTOMATIC", 
+        Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Sedan",
+        city_mpg: 13, highway_MPG: 20},
+      {Make: "Ford", Model: "Mustang", Year: 2013, Transmission: "AUTOMATIC", 
+        Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Coupe",
+        city_mpg: 15, highway_MPG: 24}
+    ])
 
 
   const callApiTest = async () => {
@@ -54,7 +65,7 @@ function ViewHistory() {
     const body = await response.json;
     
     if (response.status !== 200) throw Error(body.message);
-    setResults([1,2,3,4,5])
+    
     return body;
   
   }
@@ -77,7 +88,7 @@ function ViewHistory() {
               </Typography> 
               <IntegerInput label="Enter Result ID" handle={setSearchID} selected={searchID}></IntegerInput>
               <Button variant='contained' onClick={() => {findResult()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBottom: '3vh'}}>Find Result</Button>
-              <OutlinedCard></OutlinedCard>
+              <OutlinedCard results={results}></OutlinedCard>
         </Card>
         </div>
             
