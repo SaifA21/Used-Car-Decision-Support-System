@@ -40,7 +40,7 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/page"
+            href="/page/"
             style={{
               mr: 2,
               marginRight: "20px",
