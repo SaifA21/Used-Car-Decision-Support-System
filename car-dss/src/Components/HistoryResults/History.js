@@ -82,7 +82,7 @@ function ViewHistory() {
         </div>
        
         <div className='SelectOptions'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "100px"}}>
+            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "16px"}}>
             <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
                 Search for your previous results by ID 
               </Typography> 
