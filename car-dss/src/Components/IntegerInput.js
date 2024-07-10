@@ -12,7 +12,7 @@ export default function IntegerInput(props) {
         <FormControl sx={{ m: 1, width: 300 }} variant="outlined">
           <OutlinedInput
             id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end">MPG</InputAdornment>}
+            endAdornment={<InputAdornment position="end"></InputAdornment>}
             aria-describedby="outlined-weight-helper-text"
             inputProps={{
               'aria-label': 'weight',
