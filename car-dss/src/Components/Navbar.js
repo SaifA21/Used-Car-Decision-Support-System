@@ -90,7 +90,7 @@ const Navbar = () => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                   <Link style={{textDecoration: "none", color: 'black'}} to={`/page/${page}`}>
-                    {page}
+                    {page.toUpperCase()}
                   </Link>
                   </Typography>
                 </MenuItem>
@@ -107,7 +107,7 @@ const Navbar = () => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link style={{textDecoration: "none", color: 'white'}} to={`/page/${page}`}>
-                    {page}
+                    {page.toUpperCase()}
                   </Link>
               </Button>
             ))}
