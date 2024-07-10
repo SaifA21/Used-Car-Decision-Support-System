@@ -41,7 +41,7 @@ export default function Multiselect(props) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 250 }}>
         <InputLabel id="demo-multiple-name-label">{props.label}</InputLabel>
         <Select
           labelId="demo-multiple-name-label"

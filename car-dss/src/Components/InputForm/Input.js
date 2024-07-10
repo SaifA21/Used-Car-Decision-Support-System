@@ -39,13 +39,11 @@ function Input() {
     "Oldsmobile", "Plymouth", "Pontiac", "Porsche", "Rolls-Royce", "Saab", 
     "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
   ];  
-  
   const year = [
     "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999",
     "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
     "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"
   ];  
-  
   const trans = ["Automatic", "Manual"]
 
   const callApiTest = async () => {
@@ -74,8 +72,8 @@ function Input() {
         <Navbar></Navbar>
 
         <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
-          <Typography variant="h2" gutterBottom align="center">
-              Car Search - Find a Car
+          <Typography variant="h3" gutterBottom align="center">
+            Find Your Dream car!
           </Typography> 
         </Card>
         </div>
@@ -149,7 +147,7 @@ function Input() {
             <Button variant='contained' 
               onClick={() => {callApiTest()}} 
               style={{backgroundColor: '#4169e1', 
-              color: 'white', width: '40vh', height: '5vh', 
+              color: 'white', width: '250px', height: '5vh', 
               marginBottom: '3vh'}}>
                 Submit
             </Button>
