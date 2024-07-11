@@ -92,27 +92,27 @@ function Input() {
           </Typography> 
 
           <Grid container spacing={2} style={{ marginBlock: '25px' }}>
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How much do you value having a newer car?
                 </Typography>
                 <Multiselect label="Year Range" options={year} handle={setSelectedYear} selected={selectedYear}></Multiselect>              
             </Grid>
           
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How valuable is a powerful engine in your vehicle?
                 </Typography>
                 <Dropdown label="HP" options={engineHP} handle={setSelectedHP} selected={selectedHP}></Dropdown>              
             </Grid>
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What is your preferred vehicle style?
                 </Typography>
                 <Dropdown label="Vehicle Style" options={vehicleStyle} handle={setSelectedStyle} selected={selectedStyle}></Dropdown>              
             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How much do you value good gas mileage in your car?
                 </Typography>
@@ -126,28 +126,28 @@ function Input() {
                 <DrivingSlider handle={setSelectedTimeHighway}></DrivingSlider>
             </Grid>
           
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What is the desired price you wish to spend?
                 </Typography>
                 <IntegerInput label="Desired Price Value" handle={setDesiredPrice} selected={desiredPrice}></IntegerInput>    
             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What type of wheel configuration do you prefer?
                 </Typography>
                 <Multiselect label="Drivetrain Type" options={trans} handle={setSelectedDrivetrain} selected={selectedDrivetrain}></Multiselect>              
             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What type of transmission type do you prefer?
                 </Typography>
                 <Multiselect label="Transmission Type" options={trans} handle={setSelectedTrans} selected={selectedTrans}></Multiselect>              
             </Grid>
 
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What type of fuel type would you like your car to have?
                 </Typography>
