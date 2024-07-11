@@ -36,6 +36,7 @@ export default function Dropdown(props) {
     props.handle(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
+      console.log(value),
     );
   };
 
