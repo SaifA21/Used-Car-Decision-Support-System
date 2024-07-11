@@ -3,46 +3,45 @@ import json
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
 from flask import Flask, request
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-
+from compute import compute
+from flask_cors import CORS
 
 # Initialize the Firebase app
 initialize_app()
+
+# LOCAL TESTING
+app = Flask(__name__)
+CORS(app, origins=["http://localhost:3000"])
 
 # Define the request handler using the decorator
 @https_fn.on_request()
 def process(req: https_fn.Request) -> https_fn.Response:
     try:
         # Parse the JSON request
+
         data = req.get_json()
-        x = data.get('x')
-        y = data.get('y')
-
-        if not x or not y:
-            return https_fn.Response("Invalid input data", status=400)
         
-        data_file = "data.csv"
-        data_df = pd.read_csv(data_file)
-
-        test = data_df.head()
-
-        # Convert x and y to numpy arrays and reshape x for sklearn
-        x_np = np.array(x).reshape(-1, 1)
-        y_np = np.array(y)
-
-        # Create and fit the linear regression model
-        model = LinearRegression().fit(x_np, y_np)
+        msrp = data.get('MSRP')
+        mpg = data.get('MPG')
+        Number_of_Doors = data.get('Number of Doors')
+        Engine_HP = data.get('Engine HP')
+        Year = data.get('Year')
+        Highway_Percent = data.get('Highway Percent')
+        Vehicle_Size = data.get('Vehicle Size')
+        Engine_Fuel_Type = data.get('Engine Fuel Type')
+        Transmission_Type = data.get('Transmission Type')
+        Driven_Wheels = data.get('Driven Wheels')
 
         # Prepare the response with the model's slope and intercept
-        response_data = {
-            "slope": model.coef_[0].tolist(),
-            "intercept": model.intercept_.tolist()
-        }
+        response_data = compute(msrp, mpg, Number_of_Doors, 
+                                Engine_HP, Year, Highway_Percent, 
+                                Vehicle_Size, Engine_Fuel_Type, 
+                                Transmission_Type, Driven_Wheels)
+        
+        print(response_data)
 
         # Return the response as JSON
-        return https_fn.Response(json.dumps(response_data), status=200, headers={"Content-Type": "application/json"})
+        return https_fn.Response(response_data, status=200, headers={"Content-Type": "application/json"})
     
     except Exception as e:
         # Handle unexpected errors
