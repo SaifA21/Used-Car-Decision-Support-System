@@ -137,7 +137,7 @@ function Input() {
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 What type of wheel configuration do you prefer?
                 </Typography>
-                <Multiselect label="Drivetrain Type" options={trans} handle={setSelectedDrivetrain} selected={selectedDrivetrain}></Multiselect>              
+                <Multiselect label="Drivetrain Type" options={drivetrain} handle={setSelectedDrivetrain} selected={selectedDrivetrain}></Multiselect>              
             </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
