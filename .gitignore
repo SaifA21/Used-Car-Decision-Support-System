@@ -6,3 +6,5 @@ car-dss/functions/config.js
 /car-dss/python/venv/Lib
 *.log
 *.cache
+*.env
+*config.js

@@ -38,6 +38,28 @@ app.post('/api/test', (req,res) => {
 	connection.end();
 });
 
+app.post('/api/searchResultById', (req,res) => {
+
+	let connection = mysql.createConnection(config);
+	connection.connect();
+	let sql = `SELECT * FROM db.results WHERE id = ${req.body.id};`
+	console.log(sql)
+
+	connection.query(sql,(error, results, fields) => {
+		if (error){
+			return console.error(error.message);
+		}
+		console.log(results)
+		let string = JSON.stringify(results)
+		console.log(string)
+		res.send({express: string})
+
+	});
+	
+
+	connection.end();
+});
+
 
 
 
