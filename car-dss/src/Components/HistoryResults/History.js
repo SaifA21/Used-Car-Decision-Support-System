@@ -14,21 +14,22 @@ import { styled } from '@mui/system';
 import Navbar from '../Navbar';
 
 
-function ViewHistory() {
+export default function ViewHistory() {
   
   const [searchID, setSearchID] = React.useState()
-  const [results, setResults] = React.useState([
-      {Make: "BMW", Model: "1 Series", Year: 2011, MSRP: "$15000", Transmission: "MANUAL", 
-        Driven_Wheels: "rear wheel drive", Number_of_Doors: 2, Vehicle_Style: "Coupe",
-        city_mpg: 13, highway_MPG: 24
-      },
-      {Make: "Merc", Model: "C-Class", Year: 2014, MSRP: "$15000", Transmission: "AUTOMATIC", 
-        Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Sedan",
-        city_mpg: 13, highway_MPG: 20},
-      {Make: "Ford", Model: "Mustang", Year: 2013, MSRP: "$15000", Transmission: "AUTOMATIC", 
-        Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Coupe",
-        city_mpg: 15, highway_MPG: 24}
-    ])
+  const [searchParameter, setSearchParameter] = React.useState({
+    'carBodyStylesSelected': '',
+    'carSizeSelected': '',
+    'cityMPG': '',
+    'driveTrainSelected': '',
+    'fuelTypeSelected': '',
+    'hwyMPG': '',
+    'id': '',
+    'numCarsSelected': '',
+    'numDoorsSelected': '',
+    'numOfCylindersSelected': ''
+  })
+  const [results, setResults] = React.useState([])
 
 
   const callApiTest = async () => {
@@ -52,48 +53,80 @@ function ViewHistory() {
   //callApiTest();
 
   const findResult = async () => {
-
-    const url = "/api/test";
+    console.log(searchID)
+    const url = "/api/searchResultById";
     const response = await fetch(url, {
       method: "POST", 
       headers: {
         "Content-Type": "application/json"
       }, 
-      body: JSON.stringify()
+      body: JSON.stringify({ id: searchID })
     
     });
-    const body = await response.json;
+    const body = await response.json();
     
     if (response.status !== 200) throw Error(body.message);
-    
+   
     return body;
   
+  }
+
+  const loadUpdates = () => {
+    
+    findResult()
+    .then(res => {
+        var parsed = JSON.parse(res.express);
+        var results = [([parsed[0].car1Result][0]), ([parsed[0].car2Result][0]), ([parsed[0].car3Result][0]), ([parsed[0].car4Result][0]), ([parsed[0].car5Result][0])]
+        console.log(results)
+        var searchParameters = {
+          'carBodyStylesSelected': parsed[0].carBodyStylesSelected,
+          'carSizeSelected': parsed[0].carSizeSelected,
+          'cityMPG': parsed[0].cityMPG,
+          'driveTrainSelected': parsed[0].driveTrainSelected,
+          'fuelTypeSelected': parsed[0].fuelTypeSelected,
+          'hwyMPG': parsed[0].hwyMPG,
+          'id': parsed[0].id,
+          'numCarsSelected': parsed[0].numCarsSelected,
+          'numDoorsSelected': parsed[0].numDoorsSelected,
+          'numOfCylindersSelected': parsed[0].numOfCylindersSelected
+        }
+        console.log(parsed[0])
+        console.log(searchParameters)
+        setSearchParameter(searchParameters)
+        setResults(results)
+      }
+    )
   }
   
   return (
     <div className='background'>
         <Navbar></Navbar>
-        <div className='Title'>
-            <Card style={{color: 'white', backgroundColor: '#4169e1', height: "auto"}} align="center">
-            <Typography variant="h2" gutterBottom align="center">
-                View Recommendation History
-            </Typography> 
-            </Card>
-        </div>
        
         <div className='SelectOptions'>
-            <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "16px"}}>
-            <Typography variant="h4" gutterBottom style={{marginTop: '2vh'}}>
-                Search for your previous results by ID 
-              </Typography> 
-              <IntegerInput label="Enter Result ID" handle={setSearchID} selected={searchID}></IntegerInput>
-              <Button variant='contained' onClick={() => {findResult()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBottom: '3vh'}}>Find Result</Button>
-              <OutlinedCard results={results}></OutlinedCard>
-        </Card>
+          <Card style={{color: 'black', backgroundColor: 'white', height: "auto", width: "70%", borderRadius: "16px"}}>
+            <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
+              Search for your previous results and let us know whether you purchased from a recommendation
+            </Typography> 
+            
+            <IntegerInput label="Enter Result ID" handle={setSearchID} selected={searchID}></IntegerInput>
+            
+            <Button variant='contained' onClick={() => {loadUpdates()}} style={{backgroundColor: '#4169e1', color: 'white', width: '40vh', height: '5vh', marginBottom: '3vh'}}>Find Result</Button>
+            
+            <CardContent>
+              <Card>
+                <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+                  Your Search Parameters Were:
+                </Typography>
+                <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+                  Car Body Style : {searchParameter.carBodyStylesSelected}
+                </Typography>
+              </Card>
+            </CardContent>
+
+            <OutlinedCard results={results}></OutlinedCard>
+          </Card>
         </div>
             
     </div>
   );
 }
-
-export default ViewHistory;

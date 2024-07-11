@@ -39,46 +39,8 @@ export default function OutlinedCard(prop) {
         <br />
         <CardContent>
           <Card>
-          <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
-            {item.Year} {item.Make} {item.Model}
-          </Typography>
-          
-
-          <Grid container spacing={2} style={{justifyContent: 'center', display: 'flex'}}>
-            <Grid item xs={12} sm={12} md={12}>
-                <Typography variant="h5" component="div">
-                  {item.MSRP}
-                </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}> 
-                <Card style={{marginBlock: '10px'}}>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {item.Transmission} 
-                    </Typography>
-                </Card>
-                <Card style={{marginBlock: '10px'}}>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {item.Driven_Wheels}
-                    </Typography>
-                </Card>
-                <Card style={{marginBlock: '10px'}}>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {item.Number_of_Doors}
-                    </Typography>
-                </Card>
-                <Card style={{marginBlock: '10px'}}>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {item.Vehicle_Style}
-                    </Typography>
-                </Card>
-            </Grid>
-          </Grid>
-
-          
-          <Typography variant="body2">
-            City MPG:    {item.city_mpg}
-            Highway MPG: {item.highway_MPG}
-            <br />
+          <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+            {item}
           </Typography>
           <CardActions style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Button onClick={() => {savePurchase()}} size="small" variant='contained' style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>Purchased</Button>
