@@ -5,7 +5,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 
 
-export default function CarCountSlider(props) {
+export default function DrivingSlider(props) {
   
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
@@ -18,18 +18,18 @@ export default function CarCountSlider(props) {
     <FormControl sx={{ m: 1, minwidth: '25ch' }} variant="outlined" fullWidth>
     <Box sx={{ minwidth: 250 }}>
       <Slider
-        aria-label="Number of cars to recommend"
-        defaultValue={1}
-        step={1}
+        aria-label="Percentage of Highway Driving"
+        defaultValue={50}
+        step={10}
         marks
-        min={1}
-        max={5}
+        min={0}
+        max={100}
         valueLabelDisplay="auto"
-        helperText="Number of Cars to Recommend"
+        helperText="Percentage of Highway Driving"
         onChange={handleChange}
       />
     </Box>
-    <FormHelperText id="outlined-weight-helper-text">Number of Cars to Recommend</FormHelperText>
+    <FormHelperText id="outlined-weight-helper-text">Percentage of Highway Driving</FormHelperText>
     </FormControl>
   );
 }
