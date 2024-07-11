@@ -8,12 +8,12 @@ const functions = require('firebase-functions')
 const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-const {onRequest} = require("firebase-functions/v2/https");
+const { onRequest } = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 
 
 
-app.post('/api/test', (req,res) => {
+app.post('/api/test', (req, res) => {
 
 	let connection = mysql.createConnection(config);
 	connection.connect();
@@ -24,15 +24,16 @@ app.post('/api/test', (req,res) => {
     VALUES
     ("1","test","test","test","test","test","test","test","test","test","test","test","test","test","test");`
 
-	connection.query(sql, function (error, results, fields){
+	connection.query(sql, function (error, results, fields) {
 		if (error) throw error;
 		res.status(200).send(JSON.stringify("Success!"));
 		console.log(req.socket.remoteAddress);
-		
+
 	});
 
 	connection.end();
 });
+
 
 
 
