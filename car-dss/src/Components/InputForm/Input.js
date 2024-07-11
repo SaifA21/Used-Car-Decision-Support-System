@@ -24,6 +24,8 @@ function Input() {
   const [selectedStyle, setSelectedStyle] = React.useState("")
   const [selectedMileage, setSelectedMileage] = React.useState([])
   const [selectedTrans, setSelectedTrans] = React.useState([])
+  const [finalOutput, setFinalOutput] = React.useState([])
+
 
 
 
@@ -203,8 +205,10 @@ const handleSubmit = async () => {
       MSRP: value[11],
       CombinedMPG: value[12]
     }))
-    console.log(results)
+
+    setFinalOutput(results)
 }
+
 
 
 
@@ -313,7 +317,7 @@ const handleSubmit = async () => {
           <Typography variant="h4" gutterBottom style={{ marginTop: '2vh' }}>
             These are the cars we believe suit you best!
           </Typography>
-          <SearchCard results={results}></SearchCard>
+          <SearchCard results={finalOutput}></SearchCard>
         </Card>
       </div>
     </div>
