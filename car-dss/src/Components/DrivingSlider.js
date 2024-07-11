@@ -15,8 +15,8 @@ export default function DrivingSlider(props) {
   };
 
   return (
-    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-    <Box sx={{ width: 250 }}>
+    <FormControl sx={{ m: 1, minwidth: '25ch' }} variant="outlined" fullWidth>
+    <Box sx={{ minwidth: 250 }}>
       <Slider
         aria-label="Percentage of Highway Driving"
         defaultValue={50}
