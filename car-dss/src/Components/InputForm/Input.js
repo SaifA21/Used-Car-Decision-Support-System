@@ -8,6 +8,9 @@ import IntegerInput from '../IntegerInput'
 import * as React from 'react'
 import './Input.css'
 import Navbar from '../Navbar';
+import SearchCard from '../searchResults';
+import OutlinedCard from '../resultCard';
+
 
 function Input() {
 
@@ -21,6 +24,8 @@ function Input() {
   const [selectedStyle, setSelectedStyle] = React.useState("")
   const [selectedMileage, setSelectedMileage] = React.useState([])
   const [selectedTrans, setSelectedTrans] = React.useState([])
+  const [finalOutput, setFinalOutput] = React.useState([])
+
 
 
 
@@ -146,17 +151,14 @@ function Input() {
     apiPayload['Highway Percent'] = selectedTimeHighway / 100
 
     console.log(apiPayload)
-
-    callPythonProcessAPI()
-
   }
 
 
   const callPythonProcessAPI = async () => {
 
 
-    const url = "/python/process";
-    //const url = "/process";
+    //const url = "/python/process";
+    const url = "/process";
 
 
     try {
@@ -175,6 +177,7 @@ function Input() {
 
       const body = await response.json(); // Correctly awaiting the JSON body
       console.log("API response:", body);
+
       return body;
     } catch (error) {
       console.error("Error during API call:", error.message);
@@ -182,6 +185,34 @@ function Input() {
     }
 
   }
+
+  const handleSubmit = async () => {
+    mapUserInputToAPIPayload()
+
+    const output = await callPythonProcessAPI();
+
+    const results = Object.entries(output).map(([key, value]) => ({
+      id: key,
+      Make: value[0],
+      Model: value[1],
+      Year: value[2],
+      FuelType: value[3],
+      EngineHP: value[4],
+      Transmission: value[5],
+      Drivetrain: value[6],
+      NumDoors: value[7],
+      HighwayMPG: value[9],
+      CityMPG: value[10],
+      MSRP: value[11],
+      CombinedMPG: value[12]
+    }))
+
+    await setFinalOutput(results)
+  }
+
+
+
+
 
   //callApiTest();
 
@@ -272,7 +303,7 @@ function Input() {
           </Grid>
 
           <Button variant='contained'
-            onClick={() => { mapUserInputToAPIPayload() }}
+            onClick={() => { handleSubmit() }}
             style={{
               backgroundColor: '#4169e1',
               color: 'white', width: '250px', height: '5vh',
@@ -287,6 +318,7 @@ function Input() {
           <Typography variant="h4" gutterBottom style={{ marginTop: '2vh' }}>
             These are the cars we believe suit you best!
           </Typography>
+          <SearchCard results={finalOutput}></SearchCard>
         </Card>
       </div>
     </div>
