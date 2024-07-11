@@ -157,8 +157,8 @@ function Input() {
   const callPythonProcessAPI = async () => {
 
 
-    //const url = "/python/process";
-    const url = "/process";
+    const url = "/python/process";
+    //const url = "/process";
 
 
     try {
