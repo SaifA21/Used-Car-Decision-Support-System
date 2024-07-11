@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {Card, CardActions, CardContent, Grid, Button, Select, MenuItem, FormControl, InputLabel, TextField, Radio, FormLabel, RadioGroup, FormControlLabel, FormHelperText, CssBaseline} from "@mui/material";
+
 
 const bull = (
   <Box
@@ -40,24 +38,53 @@ export default function OutlinedCard(prop) {
       <Box sx={{ minWidth: 275 }}>
         <br />
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Card>
+          <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
             {item.Year} {item.Make} {item.Model}
           </Typography>
-          <Typography variant="h5" component="div">
-            {item.MSRP}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {item.Transmission} {item.Driven_Wheels} {item.Number_of_Doors} {item.Vehicle_Style}
-          </Typography>
+          
+
+          <Grid container spacing={2} style={{justifyContent: 'center', display: 'flex'}}>
+            <Grid item xs={12} sm={12} md={12}>
+                <Typography variant="h5" component="div">
+                  {item.MSRP}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}> 
+                <Card style={{marginBlock: '10px'}}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {item.Transmission} 
+                    </Typography>
+                </Card>
+                <Card style={{marginBlock: '10px'}}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {item.Driven_Wheels}
+                    </Typography>
+                </Card>
+                <Card style={{marginBlock: '10px'}}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {item.Number_of_Doors}
+                    </Typography>
+                </Card>
+                <Card style={{marginBlock: '10px'}}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {item.Vehicle_Style}
+                    </Typography>
+                </Card>
+            </Grid>
+          </Grid>
+
+          
           <Typography variant="body2">
             City MPG:    {item.city_mpg}
             Highway MPG: {item.highway_MPG}
             <br />
           </Typography>
-        </CardContent>
-        <CardActions style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <CardActions style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Button onClick={() => {savePurchase()}} size="small" variant='contained' style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>Purchased</Button>
         </CardActions>
+        </Card>
+        </CardContent>
       </Box>
     ))}
     </div>

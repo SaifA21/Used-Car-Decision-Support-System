@@ -18,14 +18,14 @@ function ViewHistory() {
   
   const [searchID, setSearchID] = React.useState()
   const [results, setResults] = React.useState([
-      {Make: "BMW", Model: "1 Series", Year: 2011, Transmission: "MANUAL", 
+      {Make: "BMW", Model: "1 Series", Year: 2011, MSRP: "$15000", Transmission: "MANUAL", 
         Driven_Wheels: "rear wheel drive", Number_of_Doors: 2, Vehicle_Style: "Coupe",
         city_mpg: 13, highway_MPG: 24
       },
-      {Make: "Merc", Model: "C-Class", Year: 2014, Transmission: "AUTOMATIC", 
+      {Make: "Merc", Model: "C-Class", Year: 2014, MSRP: "$15000", Transmission: "AUTOMATIC", 
         Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Sedan",
         city_mpg: 13, highway_MPG: 20},
-      {Make: "Ford", Model: "Mustang", Year: 2013, Transmission: "AUTOMATIC", 
+      {Make: "Ford", Model: "Mustang", Year: 2013, MSRP: "$15000", Transmission: "AUTOMATIC", 
         Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Coupe",
         city_mpg: 15, highway_MPG: 24}
     ])
