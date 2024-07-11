@@ -157,8 +157,8 @@ function Input() {
   const callPythonProcessAPI = async () => {
 
 
-    const url = "/python/process";
-    //const url = "/process";
+    //const url = "/python/process";
+    const url = "/process";
 
 
     try {
@@ -177,21 +177,22 @@ function Input() {
 
       const body = await response.json(); // Correctly awaiting the JSON body
       console.log("API response:", body);
-  
+
       return body;
-      } catch (error) {
+    } catch (error) {
       console.error("Error during API call:", error.message);
       throw error; // Rethrow or handle error as needed
     }
-    
+
   }
 
-const handleSubmit = async () => {
-  mapUserInputToAPIPayload()
-  
-  const output = callPythonProcessAPI();
+  const handleSubmit = async () => {
+    mapUserInputToAPIPayload()
 
-    const results = Object.entries(output).map(([key,value]) => ({
+    const output = await callPythonProcessAPI();
+
+    const results = Object.entries(output).map(([key, value]) => ({
+      id: key,
       Make: value[0],
       Model: value[1],
       Year: value[2],
@@ -206,8 +207,8 @@ const handleSubmit = async () => {
       CombinedMPG: value[12]
     }))
 
-    setFinalOutput(results)
-}
+    await setFinalOutput(results)
+  }
 
 
 
