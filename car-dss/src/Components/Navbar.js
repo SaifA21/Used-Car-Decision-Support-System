@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" style={{backgroundColor: '#222222'}}>
+    <AppBar position="static" style={{ backgroundColor: '#222222' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -64,9 +64,9 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              
+
             >
-            <MenuIcon />
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -89,32 +89,32 @@ const Navbar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                  <Link style={{textDecoration: "none", color: 'black'}} to={`/page/${page}`}>
-                    {page.toUpperCase()}
-                  </Link>
+                    <Link style={{ textDecoration: "none", color: 'black' }} to={`/page/${page}`}>
+                      {page.toUpperCase()}
+                    </Link>
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: {xs: 'black'}}}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: { xs: 'black' } }}>
             {pages.map((page) => (
               <Button
-                
+
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link style={{textDecoration: "none", color: 'white'}} to={`/page/${page}`}>
-                    {page.toUpperCase()}
-                  </Link>
+                <Link style={{ textDecoration: "none", color: 'white' }} to={`/page/${page}`}>
+                  {page.toUpperCase()}
+                </Link>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            
+
           </Box>
         </Toolbar>
       </Container>
