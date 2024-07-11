@@ -1,33 +1,67 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { useTheme } from '@mui/material/styles';
 
-export default function Dropdown() {
-  const [make, setMake] = React.useState('Acura');
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(name, selectedOptions, theme) {
+  return {
+    fontWeight:
+      selectedOptions.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+export default function Dropdown(props) {
+  const theme = useTheme();
 
   const handleChange = (event) => {
-    setMake(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    props.handle(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Make</InputLabel>
+    <div>
+      <FormControl sx={{ m: 0, minwidth: 250 }} fullWidth>
+        <InputLabel id="demo-multiple-name-label">{props.label}</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={make}
-          label="Make"
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          value={props.selected}
           onChange={handleChange}
+          input={<OutlinedInput label={props.label} />}
+          MenuProps={MenuProps}
         >
-          <MenuItem value={10}>BMW</MenuItem>
-          <MenuItem value={20}>Toyota</MenuItem>
-          <MenuItem value={30}>Bentley</MenuItem>
+          {props.options.map((option) => (
+            <MenuItem
+              key={option}
+              value={option}
+              style={getStyles(option, props.selected, theme)}
+            >
+              {option}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 }
