@@ -8,7 +8,7 @@ import IntegerInput from '../IntegerInput'
 import * as React from 'react'
 import './Input.css'
 import Navbar from '../Navbar';
-import searchResults from '../searchResults';
+import SearchCard from '../searchResults';
 import OutlinedCard from '../resultCard';
 
 
@@ -149,9 +149,6 @@ function Input() {
     apiPayload['Highway Percent'] = selectedTimeHighway / 100
 
     console.log(apiPayload)
-
-    callPythonProcessAPI()
-
   }
 
 
@@ -187,100 +184,30 @@ function Input() {
     
   }
 
-  const body = {
-    "1731": [
-        "Mazda",
-        "B-Series Truck",
-        2008,
-        "regular unleaded",
-        143.0,
-        "MANUAL",
-        "rear wheel drive",
-        2.0,
-        1,
-        26,
-        21,
-        15535,
-        23.5
-    ],
-    "4824": [
-        "Suzuki",
-        "Forenza",
-        2008,
-        "regular unleaded",
-        127.0,
-        "AUTOMATIC",
-        "front wheel drive",
-        4.0,
-        1,
-        28,
-        19,
-        15589,
-        23.5
-    ],
-    "7744": [
-        "Chrysler",
-        "PT Cruiser",
-        2008,
-        "regular unleaded",
-        150.0,
-        "MANUAL",
-        "front wheel drive",
-        4.0,
-        1,
-        26,
-        21,
-        15970,
-        23.5
-    ],
-    "8477": [
-        "Suzuki",
-        "Reno",
-        2007,
-        "regular unleaded",
-        127.0,
-        "AUTOMATIC",
-        "front wheel drive",
-        4.0,
-        1,
-        28,
-        19,
-        14699,
-        23.5
-    ],
-    "7997": [
-        "Volkswagen",
-        "Rabbit",
-        2007,
-        "regular unleaded",
-        150.0,
-        "MANUAL",
-        "front wheel drive",
-        2.0,
-        1,
-        28,
-        19,
-        14990,
-        23.5
-    ]
-}
+const handleSubmit = async () => {
+  mapUserInputToAPIPayload()
   
-for (const key in body){
-  console.log(body[key][0])
+  const output = callPythonProcessAPI();
+
+    const results = Object.entries(output).map(([key,value]) => ({
+      Make: value[0],
+      Model: value[1],
+      Year: value[2],
+      FuelType: value[3],
+      EngineHP: value[4],
+      Transmission: value[5],
+      Drivetrain: value[6],
+      NumDoors: value[7],
+      HighwayMPG: value[9],
+      CityMPG: value[10],
+      MSRP: value[11],
+      CombinedMPG: value[12]
+    }))
+    console.log(results)
 }
 
-  const [results, setResults] = React.useState([
-    {Make: "Honda", Model: "1 Series", Year: 2011, MSRP: "$15000", Transmission: "MANUAL", 
-      Driven_Wheels: "rear wheel drive", Number_of_Doors: 2, Vehicle_Style: "Coupe",
-      city_mpg: 13, highway_MPG: 24
-    },
-    {Make: "Merc", Model: "C-Class", Year: 2014, MSRP: "$15000", Transmission: "AUTOMATIC", 
-      Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Sedan",
-      city_mpg: 13, highway_MPG: 20},
-    {Make: "Ford", Model: "Mustang", Year: 2013, MSRP: "$15000", Transmission: "AUTOMATIC", 
-      Driven_Wheels: "rear wheel drive", Number_of_Doors: 4, Vehicle_Style: "Coupe",
-      city_mpg: 15, highway_MPG: 24}
-  ])
+
+
 
   //callApiTest();
 
@@ -371,7 +298,7 @@ for (const key in body){
           </Grid>
 
           <Button variant='contained'
-            onClick={() => { mapUserInputToAPIPayload() }}
+            onClick={() => { handleSubmit() }}
             style={{
               backgroundColor: '#4169e1',
               color: 'white', width: '250px', height: '5vh',
@@ -386,8 +313,7 @@ for (const key in body){
           <Typography variant="h4" gutterBottom style={{ marginTop: '2vh' }}>
             These are the cars we believe suit you best!
           </Typography>
-          <searchResults results={results}></searchResults>
-          <OutlinedCard results={results}></OutlinedCard>
+          <SearchCard results={results}></SearchCard>
         </Card>
       </div>
     </div>

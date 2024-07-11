@@ -31,7 +31,7 @@ const savePurchase = async () => {
   return body;
 }
 
-export default function searchResults(prop) {
+export default function SearchCard(prop) {
   return (
     <div>
       {prop.results.map((item, index) => (
@@ -47,7 +47,7 @@ export default function searchResults(prop) {
           <Grid container spacing={2} style={{justifyContent: 'center', display: 'flex'}}>
             <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h5" component="div">
-                  {item.MSRP}
+                  {'$' + item.MSRP}
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3}> 
@@ -58,17 +58,22 @@ export default function searchResults(prop) {
                 </Card>
                 <Card style={{marginBlock: '10px'}}>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {item.Driven_Wheels}
+                    {item.Drivetrain}
                     </Typography>
                 </Card>
                 <Card style={{marginBlock: '10px'}}>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {item.Number_of_Doors}
+                      {item.NumDoors}
                     </Typography>
                 </Card>
                 <Card style={{marginBlock: '10px'}}>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {item.Vehicle_Style}
+                      {item.EngineHP}
+                    </Typography>
+                </Card>
+                <Card style={{marginBlock: '10px'}}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {item.FuelType}
                     </Typography>
                 </Card>
             </Grid>
@@ -76,8 +81,9 @@ export default function searchResults(prop) {
 
           
           <Typography variant="body2">
-            City MPG:    {item.city_mpg}
-            Highway MPG: {item.highway_MPG}
+            City MPG:    {item.CityMPG}
+            Highway MPG: {item.HighwayMPG}
+            CombinedMPG: {item.CombinedMPG}
             <br />
           </Typography>
           <CardActions style={{textAlign: 'center', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
