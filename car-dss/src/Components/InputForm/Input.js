@@ -96,7 +96,7 @@ function Input() {
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How much do you value having a newer car?
                 </Typography>
-                <Multiselect label="Year Range" options={year} handle={setSelectedYear} selected={selectedYear}></Multiselect>              
+                <Dropdown label="Year Range" options={year} handle={setSelectedYear} selected={selectedYear}></Dropdown>              
             </Grid>
           
             <Grid item xs={12} sm={12} md={12}>
