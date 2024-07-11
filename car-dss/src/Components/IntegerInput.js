@@ -9,7 +9,7 @@ export default function IntegerInput(props) {
 
   return(
     <div>
-        <FormControl sx={{ m: 1, minwidth: 250 }} variant="outlined" fullWidth>
+        <FormControl sx={{ m: 0, minwidth: 250 }} variant="outlined" fullWidth>
           <OutlinedInput
             id="outlined-adornment-weight"
             endAdornment={<InputAdornment position="end"></InputAdornment>}

@@ -116,10 +116,10 @@ function Input() {
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How much do you value good gas mileage in your car?
                 </Typography>
-                <Multiselect label="Good Mileage" options={goodMileage} handle={setSelectedMileage} selected={selectedMileage}></Multiselect>              
+                <Dropdown label="Good Mileage" options={goodMileage} handle={setSelectedMileage} selected={selectedMileage}></Dropdown>              
             </Grid>
           
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
                 How much of your driving time as a percentage do you spend on the highway (not in city driving)?
                 </Typography>
@@ -128,9 +128,30 @@ function Input() {
           
             <Grid item xs={12} sm={6} md={6}>
                 <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
-                What is the desired price you wish to spend on your car?
+                What is the desired price you wish to spend?
                 </Typography>
                 <IntegerInput label="Desired Price Value" handle={setDesiredPrice} selected={desiredPrice}></IntegerInput>    
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={6}>
+                <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
+                What type of wheel configuration do you prefer?
+                </Typography>
+                <Multiselect label="Drivetrain Type" options={trans} handle={setSelectedDrivetrain} selected={selectedDrivetrain}></Multiselect>              
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={6}>
+                <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
+                What type of transmission type do you prefer?
+                </Typography>
+                <Multiselect label="Transmission Type" options={trans} handle={setSelectedTrans} selected={selectedTrans}></Multiselect>              
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={6}>
+                <Typography variant="h6" gutterBottom style={{marginTop: '2vh'}}>
+                What type of fuel type would you like your car to have?
+                </Typography>
+                <Multiselect label="Fuel Type" options={fuels} handle={setSelectedFuel} selected={selectedFuel}></Multiselect>              
             </Grid>
           </Grid>
 
