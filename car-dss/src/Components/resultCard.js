@@ -33,8 +33,6 @@ const savePurchase = async (item, searchID) => {
 
 export default function OutlinedCard(prop) {
 
-  const [display, setDisplay] = React.useState(false)
-
   return (
     <div>
       {prop.results.map((item, index) => (
@@ -42,19 +40,25 @@ export default function OutlinedCard(prop) {
           <Box sx={{ minWidth: 275 }}>
             <br />
             <CardContent>
-              <Card>
+              <Card sx={{ outline: '3px solid #f0f0f0' }}>
                 <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
                   {item}
                 </Typography>
                 <CardActions style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Button onClick={() => { savePurchase(item, prop.searchID); setDisplay(true) }} size="small" variant='contained' style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Purchased</Button>
+                  {!prop.purchased &&
+                    <Button onClick={() => { savePurchase(item, prop.searchID); prop.setPurchased(true) }}
+                      size="small" variant='contained' style={{
+                        textAlign: 'center', display: 'flex',
+                        alignItems: 'center', justifyContent: 'center'
+                      }}>I Purchased This Vehicle</Button>
+                  }
                 </CardActions>
               </Card>
             </CardContent>
           </Box>
 
         )))}
-      {display == true && (
+      {prop.purchased == true && (
         <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
           Thank you!
         </Typography>

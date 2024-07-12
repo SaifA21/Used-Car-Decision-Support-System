@@ -10,8 +10,11 @@ import * as React from 'react'
 import './Input.css'
 import Navbar from '../Navbar';
 import SearchCard from '../searchResults';
+import Loading from '../../Images/Loading.gif'
 
 function Input() {
+
+  const [loading, setLoading] = React.useState(false);
 
   const [numberOfRecommendations, setNumberOfRecommendations] = React.useState()
   const [selectedFuel, setSelectedFuel] = React.useState([])
@@ -24,6 +27,7 @@ function Input() {
   const [selectedMileage, setSelectedMileage] = React.useState([])
   const [selectedTrans, setSelectedTrans] = React.useState([])
   const [finalOutput, setFinalOutput] = React.useState([])
+  const [id, setId] = React.useState(0)
 
   const fuels = ["Gasoline", "Diesel", "Electric"]
 
@@ -212,9 +216,10 @@ function Input() {
       }
 
       const body = await response.json(); // Correctly awaiting the JSON body
-      console.log("API response:", body);
+      console.log("API response:", body.id);
 
-      return body;
+      return body.id;
+
     } catch (error) {
       console.error("Error during API call:", error.message);
       throw error; // Rethrow or handle error as needed
@@ -223,47 +228,57 @@ function Input() {
   }
 
   const handleSubmit = async () => {
-    mapUserInputToAPIPayload()
-    //await callAddResultsApi()
 
-    const output = await callPythonProcessAPI();
+    try {
 
-    const results = Object.entries(output).slice(0, numberOfRecommendations).map(([key, value]) => ({
-      id: key,
-      Make: value[0],
-      Model: value[1],
-      Year: value[2],
-      FuelType: value[3],
-      EngineHP: value[4],
-      Transmission: value[5],
-      Drivetrain: value[6],
-      NumDoors: value[7],
-      HighwayMPG: value[9],
-      CityMPG: value[10],
-      MSRP: value[11],
-      CombinedMPG: value[12]
-    }))
+      setLoading(true);
+
+      mapUserInputToAPIPayload()
+
+      const output = await callPythonProcessAPI();
+
+      const results = Object.entries(output).slice(0, numberOfRecommendations).map(([key, value]) => ({
+        id: key,
+        Make: value[0],
+        Model: value[1],
+        Year: value[2],
+        FuelType: value[3],
+        EngineHP: value[4],
+        Transmission: value[5],
+        Drivetrain: value[6],
+        NumDoors: value[7],
+        HighwayMPG: value[9],
+        CityMPG: value[10],
+        MSRP: value[11],
+        CombinedMPG: value[12]
+      }))
 
 
-    await setFinalOutput(results)
+      await setFinalOutput(results)
 
-    resultsApiPayload['numCars'] = numberOfRecommendations
-    resultsApiPayload['yearRange'] = selectedYear
-    resultsApiPayload['hpScale'] = selectedHP
-    resultsApiPayload['style'] = selectedStyle
-    resultsApiPayload['mileageScale'] = selectedMileage
-    resultsApiPayload['drivetrain'] = selectedDrivetrain
-    resultsApiPayload['hwyPercentage'] = selectedTimeHighway
-    resultsApiPayload['drivetrain'] = selectedDrivetrain
-    resultsApiPayload['trans'] = selectedTrans
-    resultsApiPayload['fuel'] = selectedFuel
+      resultsApiPayload['numCars'] = numberOfRecommendations
+      resultsApiPayload['yearRange'] = selectedYear
+      resultsApiPayload['hpScale'] = selectedHP
+      resultsApiPayload['style'] = selectedStyle
+      resultsApiPayload['mileageScale'] = selectedMileage
+      resultsApiPayload['drivetrain'] = selectedDrivetrain
+      resultsApiPayload['hwyPercentage'] = selectedTimeHighway
+      resultsApiPayload['drivetrain'] = selectedDrivetrain
+      resultsApiPayload['trans'] = selectedTrans
+      resultsApiPayload['fuel'] = selectedFuel
 
-    for (let i = 1; i <= numberOfRecommendations; i++) {
-      var x = resultsApiPayload[`car${i}`] = results[i - 1].Year +
-        " " + results[i - 1].Make + " " + results[i - 1].Model
+      for (let i = 1; i <= numberOfRecommendations; i++) {
+        var x = resultsApiPayload[`car${i}`] = results[i - 1].Year +
+          " " + results[i - 1].Make + " " + results[i - 1].Model
+      }
+
+      setId(await callAddResultsApi())
+      setLoading(false);
+
+    } catch (error) {
+      console.error("Error during API call:", error.message);
+      setLoading(false);
     }
-
-    await callAddResultsApi()
 
   }
 
@@ -354,6 +369,7 @@ function Input() {
 
           <Button variant='contained'
             onClick={() => { handleSubmit() }}
+            disabled={loading}
             style={{
               backgroundColor: '#4169e1',
               color: 'white', width: '250px', height: '5vh',
@@ -361,14 +377,18 @@ function Input() {
             }}>
             Submit
           </Button>
+          <div className='Loading' style={{ display: 'flex', justifyContent: 'center' }}>
+            {loading && <img src={Loading} alt="loading" style={{ width: '5%', height: '5%' }}></img>}
+          </div>
         </Card>
       </div>
+
       <div className='Submit' style={{ display: 'flex', justifyContent: 'center' }}>
         <Card sx={{ color: 'black', backgroundColor: 'white', p: 3, width: "70%", borderRadius: "16px" }} align="center">
           <Typography variant="h4" gutterBottom style={{ marginTop: '2vh' }}>
             These are the cars we believe suit you best!
           </Typography>
-          <SearchCard results={finalOutput}></SearchCard>
+          <SearchCard results={finalOutput} id={id}></SearchCard>
         </Card>
       </div>
     </div>

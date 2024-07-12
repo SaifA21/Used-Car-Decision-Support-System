@@ -125,7 +125,8 @@ VALUES (
 		console.log(results)
 		let string = JSON.stringify(results)
 		console.log(string)
-		res.send({ express: string })
+		const insertedId = results.insertId;
+		res.status(201).json({ id: insertedId });
 
 	});
 

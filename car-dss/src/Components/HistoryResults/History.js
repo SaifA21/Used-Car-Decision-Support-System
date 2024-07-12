@@ -9,6 +9,7 @@ import Navbar from '../Navbar';
 
 export default function ViewHistory() {
 
+  const [loaded, setLoaded] = React.useState(false);
   const [searchID, setSearchID] = React.useState()
   const [searchParameter, setSearchParameter] = React.useState({
     'numCarsSelected': '',
@@ -22,27 +23,7 @@ export default function ViewHistory() {
     'fuelTypes': ''
   })
   const [results, setResults] = React.useState([])
-
-
-  const callApiTest = async () => {
-
-    const url = "/api/searchResultsAll";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify()
-
-    });
-    const body = await response.json;
-
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-
-  }
-
-  //  callApiTest();
+  const [purchased, setPurchased] = React.useState(false)
 
   const findResult = async () => {
     console.log(searchID)
@@ -64,6 +45,7 @@ export default function ViewHistory() {
   }
 
   const loadUpdates = () => {
+    setPurchased(false)
 
     findResult()
       .then(res => {
@@ -87,6 +69,8 @@ export default function ViewHistory() {
         setResults(results)
       }
       )
+
+    setLoaded(true)
   }
 
   return (
@@ -94,40 +78,55 @@ export default function ViewHistory() {
       <Navbar></Navbar>
 
       <div className='SelectOptions'>
-        <Card style={{ color: 'black', backgroundColor: 'white', height: "auto", width: "75%", borderRadius: "16px" }}>
+        <Card sx={{ color: 'black', backgroundColor: 'white', p: 3, width: '70%', borderRadius: "16px" }}>
+
           <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
             Search for your previous results and let us know whether you purchased from a recommendation!
           </Typography>
 
-          <IntegerInput label="Enter Result ID" handle={setSearchID} selected={searchID}></IntegerInput>
+          <Grid container justifyContent='center' spacing={2} style={{ marginBlock: '25px' }} >
 
-          <Button
-            variant='contained'
-            onClick={loadUpdates}
-            style={{ backgroundColor: '#4169e1', color: 'white', width: '75%', height: '5vh' }}
-          >
-            Find Result
-          </Button>
-          <CardContent>
-            <Card>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Your Search Parameters Were:
-              </Typography>
-              <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
-                Preferred Car Body Style: {searchParameter.vehicleStyle} <br />
-                Preferred Drive Trains: {searchParameter.drivetrainSelections} <br />
-                Preferred Fuel Types: {searchParameter.fuelTypes} <br />
-                Number of Results to View: {searchParameter.numCarsSelected} <br />
-                Preferred Year Range of Car: {searchParameter.yearRange} <br />
-                Level of concern for higher horsepower: {searchParameter.hpScale} <br />
-                Level of Concern for better fuel mileage: {searchParameter.mileageScale} <br />
-                Estimated Percentage of Driving Time on Highway: {searchParameter.hwyPercentage} <br />
-                Preferred Transmission Types: {searchParameter.transmissionTypes} <br />
-              </Typography>
-            </Card>
-          </CardContent>
+            <Grid item xs={12} sm={12} md={12}>
+              <IntegerInput label="Enter Result ID" handle={setSearchID} selected={searchID}></IntegerInput>
+            </Grid>
 
-          <OutlinedCard searchID={searchID} results={results}></OutlinedCard>
+            <Grid item xs={12} sm={12} md={12}>
+              <Button
+                variant='contained'
+                onClick={loadUpdates}
+                style={{ backgroundColor: '#4169e1', color: 'white', width: '100%', height: '5vh' }}
+              >
+                Find Result
+              </Button>
+            </Grid>
+
+            {loaded &&
+              <Grid item xs={12} sm={12} md={12}>
+                <CardContent>
+                  <Card sx={{ outline: '3px solid #f0f0f0' }}>
+                    <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+                      Your Search Parameters Were:
+                    </Typography>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                      <b> Preferred Drivetrain:</b> {searchParameter.drivetrainSelections} <br />
+                      <b>Preferred Fuel Types:</b> {searchParameter.fuelTypes} <br />
+                      <b>Number of Results to View:</b> {searchParameter.numCarsSelected} <br />
+                      <b>Preferred Year Range of Car:</b> {searchParameter.yearRange} <br />
+                      <b>Level of concern for higher horsepower:</b> {searchParameter.hpScale} <br />
+                      <b>Level of Concern for better fuel mileage:</b> {searchParameter.mileageScale} <br />
+                      <b>Estimated Percentage of Driving Time on Highway:</b> {searchParameter.hwyPercentage} <br />
+                      <b>Preferred Transmission Types:</b> {searchParameter.transmissionTypes} <br />
+                    </Typography>
+                  </Card>
+                </CardContent>
+              </Grid>
+            }
+
+            <Grid item xs={12} sm={12} md={6}>
+              <OutlinedCard setPurchased={setPurchased} purchased={purchased} searchID={searchID} results={results}></OutlinedCard>
+            </Grid>
+
+          </Grid>
         </Card>
       </div>
 
