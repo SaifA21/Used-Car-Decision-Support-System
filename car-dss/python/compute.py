@@ -84,31 +84,47 @@ def compute(msrp, mpg, number_of_doors,
 
         features = [feature for feature in all_features if user_preferences[feature] != ""]
 
-
+        #Scale all dataset features
         scaler = StandardScaler()
         X = scaler.fit_transform(filtered_df[features])
 
         def mydist(x, y):
-            price_diff = x[0] - y[0]
-            if price_diff > 0:
-                price_diff *= -2
-            mpg_diff = x[1] - y[1]
-            if mpg_diff < 0:
-                mpg_diff *= 2
-            hp_diff = x[2] - y[2]
-            if hp_diff < 0:
-                hp_diff *= 2
-            return np.sqrt(np.sum((x - y) ** 2)) + price_diff + mpg_diff
+            price_diff = 0
+            mpg_diff = 0
+            hp_diff = 0
+            yr_diff = 0
 
-        k = 20
+            #If user preferences price is higher than a specific car in the dataset add positive factor
+            if x[0] < y[0]:
+                price_diff = y[0] - x[0]
+                price_diff *= 0.5  # add positive factor to difference; positive factors equates to further distance
 
+            #MPG
+            if x[1] < y[1]:
+                mpg_diff = y[1] - x[1]
+                mpg_diff *= -0.3  # subtract positive factor from difference (making it smaller)
+
+            #HorsePower
+            if x[2] < y[2]:
+                hp_diff = y[2] - x[2]
+                hp_diff *= -0.3
+
+            #Year
+            if x[3] < y[3]:
+                year_diff = y[2] - x[2]
+                year_diff *= -0.3
+            return np.sqrt(np.sum((x - y) ** 2)) + price_diff + mpg_diff + hp_diff + yr_diff
+
+        k = 30 #Set at 30 to ensure top 5 results can filter out duplicates (i.e. everything the same except for trim)
+
+        #Set up KNN function using euclidian distance considering applied weights in custom function
         knn = NearestNeighbors(n_neighbors=k, metric='pyfunc', metric_params={"func":mydist})
         knn.fit(X)
-
+        #Scale all of the user preference features
         user_pref_values = np.array([user_preferences[feature] for feature in features]).reshape(1, -1)
         user_pref_df = pd.DataFrame(user_pref_values, columns=features)
         user_pref_scaled = scaler.transform(user_pref_df)
-
+        #Run KNN model
         distances, indices = knn.kneighbors(user_pref_scaled)
 
         best_matches = filtered_df.iloc[indices[0]]
