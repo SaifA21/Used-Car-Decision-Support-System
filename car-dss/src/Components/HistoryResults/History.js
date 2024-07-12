@@ -18,23 +18,22 @@ export default function ViewHistory() {
   
   const [searchID, setSearchID] = React.useState()
   const [searchParameter, setSearchParameter] = React.useState({
-    'carBodyStylesSelected': '',
-    'carSizeSelected': '',
-    'cityMPG': '',
-    'driveTrainSelected': '',
-    'fuelTypeSelected': '',
-    'hwyMPG': '',
-    'id': '',
     'numCarsSelected': '',
-    'numDoorsSelected': '',
-    'numOfCylindersSelected': ''
+    'yearRange': '',
+    'hpScale': '',
+    'vehicleStyle': '',
+    'mileageScale': '',
+    'hwyPercentage': '',
+    'drivetrainSelections': '',
+    'transmissionTypes': '',
+    'fuelTypes': ''
   })
   const [results, setResults] = React.useState([])
 
 
   const callApiTest = async () => {
 
-    const url = "/api/test";
+    const url = "/api/searchResultsAll";
     const response = await fetch(url, {
       method: "POST", 
       headers: {
@@ -50,7 +49,7 @@ export default function ViewHistory() {
   
   }
 
-  //callApiTest();
+//  callApiTest();
 
   const findResult = async () => {
     console.log(searchID)
@@ -79,16 +78,15 @@ export default function ViewHistory() {
         var results = [([parsed[0].car1Result][0]), ([parsed[0].car2Result][0]), ([parsed[0].car3Result][0]), ([parsed[0].car4Result][0]), ([parsed[0].car5Result][0])]
         console.log(results)
         var searchParameters = {
-          'carBodyStylesSelected': parsed[0].carBodyStylesSelected,
-          'carSizeSelected': parsed[0].carSizeSelected,
-          'cityMPG': parsed[0].cityMPG,
-          'driveTrainSelected': parsed[0].driveTrainSelected,
-          'fuelTypeSelected': parsed[0].fuelTypeSelected,
-          'hwyMPG': parsed[0].hwyMPG,
-          'id': parsed[0].id,
           'numCarsSelected': parsed[0].numCarsSelected,
-          'numDoorsSelected': parsed[0].numDoorsSelected,
-          'numOfCylindersSelected': parsed[0].numOfCylindersSelected
+          'yearRange': parsed[0].yearRange,
+          'hpScale': parsed[0].hpScale,
+          'vehicleStyle': parsed[0].vehicleStyle,
+          'mileageScale': parsed[0].mileageScale,
+          'hwyPercentage': parsed[0].hwyPercentage,
+          'drivetrainSelections': parsed[0].drivetrainSelections,
+          'transmissionTypes': parsed[0].transmissionTypes,
+          'fuelTypes': parsed[0].fuelTypes
         }
         console.log(parsed[0])
         console.log(searchParameters)
@@ -114,16 +112,24 @@ export default function ViewHistory() {
             
             <CardContent>
               <Card>
-                <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                   Your Search Parameters Were:
                 </Typography>
-                <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-                  Car Body Style : {searchParameter.carBodyStylesSelected}
+                <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
+                  Preferred Car Body Style : {searchParameter.vehicleStyle} <br></br>
+                  Preferred Drive Trains: {searchParameter.drivetrainSelections}<br></br>
+                  Preffered Fuel Types: {searchParameter.fuelTypes}<br></br>
+                  Number of Result to View: {searchParameter.numCarsSelected}<br></br>
+                  Preferred Year Range of Car: {searchParameter.yearRange}<br></br>
+                  Level of concern for higher horsepower: {searchParameter.hpScale}<br></br>
+                  Level of Concern for better fuel mileage: {searchParameter.mileageScale}<br></br>
+                  Estimated Percentage of Driving Time on Highway: {searchParameter.hwyPercentage}<br></br>
+                  Preferred Transmission Types: {searchParameter.transmissionTypes}<br></br>
                 </Typography>
               </Card>
             </CardContent>
 
-            <OutlinedCard results={results}></OutlinedCard>
+            <OutlinedCard searchID={searchID} results={results}></OutlinedCard>
           </Card>
         </div>
             

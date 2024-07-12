@@ -61,7 +61,48 @@ app.post('/api/searchResultById', (req,res) => {
 });
 
 
+app.post('/api/searchResultsAll', (req,res) => {
 
+	let connection = mysql.createConnection(config);
+	connection.connect();
+	let sql = `SELECT * FROM db.results;`
+	console.log(sql)
+
+	connection.query(sql,(error, results, fields) => {
+		if (error){
+			return console.error(error.message);
+		}
+		console.log(results)
+		let string = JSON.stringify(results)
+		console.log(string)
+		res.send({express: string})
+
+	});
+	
+	connection.end();
+});
+
+
+app.post('/api/savePurchase', (req,res) => {
+
+	let connection = mysql.createConnection(config);
+	connection.connect();
+	let sql = `INSERT INTO responses (id, selectedCar) VALUES ('${req.body.id}', '${req.body.selectedCar}');`
+	console.log(sql)
+
+	connection.query(sql,(error, results, fields) => {
+		if (error){
+			return console.error(error.message);
+		}
+		console.log(results)
+		let string = JSON.stringify(results)
+		console.log(string)
+		res.send({express: string})
+
+	});
+	
+	connection.end();
+});
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); //for the dev version
