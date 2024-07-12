@@ -7,20 +7,20 @@ import FormControl from '@mui/material/FormControl';
 
 export default function IntegerInput(props) {
 
-  return(
+  return (
     <div>
-        <FormControl sx={{ m: 0, minwidth: 250 }} variant="outlined" fullWidth>
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end"></InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-            onChange={(event)=>{props.handle(event.target.value)}}
-          />
-          <FormHelperText id="outlined-weight-helper-text">{props.label}</FormHelperText>
-        </FormControl>
+      <FormControl sx={{ m: 0, width: "75%" }} variant="outlined" fullWidth>
+        <OutlinedInput
+          id="outlined-adornment-weight"
+          endAdornment={<InputAdornment position="end"></InputAdornment>}
+          aria-describedby="outlined-weight-helper-text"
+          inputProps={{
+            'aria-label': 'weight',
+          }}
+          onChange={(event) => { props.handle(event.target.value) }}
+        />
+        <FormHelperText id="outlined-weight-helper-text">{props.label}</FormHelperText>
+      </FormControl>
     </div>
   )
 }
