@@ -157,8 +157,8 @@ function Input() {
   const callPythonProcessAPI = async () => {
 
 
-    const url = "/python/process";
-    //const url = "/process";
+    //const url = "/python/process";
+    const url = "/process";
 
 
     try {
@@ -191,7 +191,7 @@ function Input() {
 
     const output = await callPythonProcessAPI();
 
-    const results = Object.entries(output).map(([key, value]) => ({
+    const results = Object.entries(output).slice(0, numberOfRecommendations).map(([key, value]) => ({
       id: key,
       Make: value[0],
       Model: value[1],
@@ -209,9 +209,6 @@ function Input() {
 
     await setFinalOutput(results)
   }
-
-
-
 
 
   //callApiTest();
