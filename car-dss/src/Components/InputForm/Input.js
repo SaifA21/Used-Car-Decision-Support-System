@@ -1,4 +1,5 @@
 import Slider from '../CarCountSlider';
+
 import DrivingSlider from '../DrivingSlider';
 import { Typography } from '@mui/material';
 import { Card, Grid, Button } from "@mui/material";
@@ -9,8 +10,6 @@ import * as React from 'react'
 import './Input.css'
 import Navbar from '../Navbar';
 import SearchCard from '../searchResults';
-import OutlinedCard from '../resultCard';
-
 
 function Input() {
 
@@ -26,13 +25,9 @@ function Input() {
   const [selectedTrans, setSelectedTrans] = React.useState([])
   const [finalOutput, setFinalOutput] = React.useState([])
 
-
-
-
   const fuels = ["Gasoline", "Diesel", "Electric"]
 
   const drivetrain = ["front wheel drive", "rear wheel drive", "four wheel drive", "all wheel drive"]
-
 
   const vehicleStyle = ['Coupe', 'Convertible', 'Sedan', 'Wagon', '4dr Hatchback',
     '2dr Hatchback', '4dr SUV', 'Passenger Minivan', 'Cargo Minivan', 'Crew Cab Pickup',
@@ -61,6 +56,23 @@ function Input() {
     "Engine Fuel Type": [],
     "Transmission Type": [],
     "Driven Wheels": []
+  };
+
+  const resultsApiPayload = {
+    "numCars": 1,
+    "yearRange": "",
+    "hpScale": "",
+    "style": "",
+    "mileageScale": "",
+    "hwyPercentage": "50",
+    "drivetrain": "",
+    "trans": "",
+    "fuel": "",
+    "car1": "",
+    "car2": "",
+    "car3": "",
+    "car4": "",
+    "car5": ""
   };
 
   const mapUserInputToAPIPayload = async () => {
@@ -117,7 +129,6 @@ function Input() {
       apiPayload['Engine HP'] = 250
     }
 
-
     if (selectedYear[0] === "1990-1995") {
       apiPayload['Year'] = 1993
     }
@@ -139,7 +150,6 @@ function Input() {
 
     console.log(selectedHP)
 
-
     if (selectedFuel.includes("electric")) {
       apiPayload['Engine Fuel Type'].push("DIRECT_DRIVE")
     }
@@ -153,13 +163,10 @@ function Input() {
     console.log(apiPayload)
   }
 
-
   const callPythonProcessAPI = async () => {
 
-
-    //const url = "/python/process";
-    const url = "/process";
-
+    const url = "/python/process";
+    //const url = "/process";
 
     try {
       const response = await fetch(url, {
@@ -186,8 +193,38 @@ function Input() {
 
   }
 
+  const callAddResultsApi = async () => {
+
+    const url = "/api/addResults";
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(resultsApiPayload) // Sending user data
+      });
+
+      if (!response.ok) {
+        // If the response status code is not in the 200-299 range
+        throw new Error('Network response was not ok');
+      }
+
+      const body = await response.json(); // Correctly awaiting the JSON body
+      console.log("API response:", body);
+
+      return body;
+    } catch (error) {
+      console.error("Error during API call:", error.message);
+      throw error; // Rethrow or handle error as needed
+    }
+
+  }
+
   const handleSubmit = async () => {
     mapUserInputToAPIPayload()
+    //await callAddResultsApi()
 
     const output = await callPythonProcessAPI();
 
@@ -207,18 +244,34 @@ function Input() {
       CombinedMPG: value[12]
     }))
 
+
     await setFinalOutput(results)
+
+    resultsApiPayload['numCars'] = numberOfRecommendations
+    resultsApiPayload['yearRange'] = selectedYear
+    resultsApiPayload['hpScale'] = selectedHP
+    resultsApiPayload['style'] = selectedStyle
+    resultsApiPayload['mileageScale'] = selectedMileage
+    resultsApiPayload['drivetrain'] = selectedDrivetrain
+    resultsApiPayload['hwyPercentage'] = selectedTimeHighway
+    resultsApiPayload['drivetrain'] = selectedDrivetrain
+    resultsApiPayload['trans'] = selectedTrans
+    resultsApiPayload['fuel'] = selectedFuel
+
+    for (let i = 1; i <= numberOfRecommendations; i++) {
+      var x = resultsApiPayload[`car${i}`] = results[i - 1].Year +
+        " " + results[i - 1].Make + " " + results[i - 1].Model
+    }
+
+    await callAddResultsApi()
+
   }
-
-
-  //callApiTest();
 
   return (
     <div className='background'>
       <div className='Title'>
         <Navbar></Navbar>
       </div>
-
 
       <div className='Slider' style={{ display: "flex", justifyContent: 'center', mb: 2 }}>
         <Card sx={{ color: 'black', backgroundColor: 'white', p: 3, width: '70%', borderRadius: "16px" }}>
@@ -323,3 +376,5 @@ function Input() {
 }
 
 export default Input;
+
+
