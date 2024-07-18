@@ -33,7 +33,7 @@ export default function SearchCard(props) {
         </Typography>
       </Card> : ''}
 
-      {props.results.length == 0 ? <Card style={{ marginLeft: '10px', marginRight: '10px', marginTop: '10px', backgroundColor: 'red', borderRadius: '30px' }}>
+      {props.results.length == 0 && props.results.IsSubmitted == true ? <Card style={{ marginLeft: '10px', marginRight: '10px', marginTop: '10px', backgroundColor: 'red', borderRadius: '30px' }}>
         <Typography style={{ fontSize: 25, marginBlock: '8px' }} color="white">
           Oh no! We don't have any results for you. Please change your parameters and try again!
         </Typography>
