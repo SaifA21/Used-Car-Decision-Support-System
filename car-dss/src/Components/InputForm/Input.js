@@ -270,6 +270,17 @@ function Input() {
 
       await setFinalOutput(results)
 
+      console.log("before")
+      console.log(resultsApiPayload)
+
+      for (let i = 1; i <= numberOfRecommendations; i++) {
+        resultsApiPayload[`car${i}`] = results[i - 1].Year +
+          " " + results[i - 1].Make + " " + results[i - 1].Model
+      }
+
+      console.log("after")
+      console.log(resultsApiPayload)
+
       resultsApiPayload['numCars'] = numberOfRecommendations
       resultsApiPayload['yearRange'] = selectedYear
       resultsApiPayload['hpScale'] = selectedHP
@@ -281,17 +292,7 @@ function Input() {
       resultsApiPayload['trans'] = selectedTrans
       resultsApiPayload['fuel'] = selectedFuel
 
-      console.log("before")
-      console.log(resultsApiPayload)
 
-      for (let i = 1; i <= numberOfRecommendations; i++) {
-        resultsApiPayload[`car${i}`] = results[i - 1].Year +
-          " " + results[i - 1].Make + " " + results[i - 1].Model
-      }
-
-      console.log("after")
-
-      console.log(resultsApiPayload)
 
       await callAddResultsApi()
 
