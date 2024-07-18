@@ -63,6 +63,7 @@ function Input() {
     "Number of Doors": 0,
     "Engine HP": 0,
     "Year": 0,
+    "Vehicle Style": "",
     "Highway Percent": 0,
     "Vehicle Size": 0,
     "Engine Fuel Type": [],
@@ -171,6 +172,7 @@ function Input() {
     apiPayload['Transmission Type'].push(...selectedTrans)
     apiPayload['MSRP'] = desiredPrice
     apiPayload['Highway Percent'] = selectedTimeHighway / 100
+    apiPayload['Vehicle Style'] = selectedStyle[0]
 
     console.log(apiPayload)
   }
@@ -278,12 +280,18 @@ function Input() {
       resultsApiPayload['trans'] = selectedTrans
       resultsApiPayload['fuel'] = selectedFuel
 
+      console.log("before")
+      console.log(resultsApiPayload)
+
       for (let i = 1; i <= numberOfRecommendations; i++) {
         resultsApiPayload[`car${i}`] = results[i - 1].Year +
           " " + results[i - 1].Make + " " + results[i - 1].Model
       }
 
       await callAddResultsApi()
+
+      setId(await callAddResultsApi())
+
       setLoading(false);
 
     } catch (error) {
