@@ -288,6 +288,8 @@ function Input() {
           " " + results[i - 1].Make + " " + results[i - 1].Model
       }
 
+      console.log(resultsApiPayload)
+
       await callAddResultsApi()
 
       setId(await callAddResultsApi())
