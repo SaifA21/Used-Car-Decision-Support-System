@@ -266,6 +266,7 @@ function Input() {
         IsSubmitted: true
       }))
 
+      console.log(results)
 
       await setFinalOutput(results)
 
@@ -287,6 +288,8 @@ function Input() {
         resultsApiPayload[`car${i}`] = results[i - 1].Year +
           " " + results[i - 1].Make + " " + results[i - 1].Model
       }
+
+      console.log("after")
 
       console.log(resultsApiPayload)
 
