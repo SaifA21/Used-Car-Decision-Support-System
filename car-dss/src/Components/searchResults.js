@@ -23,18 +23,18 @@ const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0
 });
 
-export default function SearchCard(prop) {
+export default function SearchCard(props) {
   return (
     <div>
 
-      {prop.results.length > 0 ? <Card style={{ marginLeft: '10px', marginRight: '10px', marginTop: '10px', backgroundColor: '#4BB543', borderRadius: '30px' }}>
+      {props.results.length > 0 ? <Card style={{ marginLeft: '10px', marginRight: '10px', marginTop: '10px', backgroundColor: '#4BB543', borderRadius: '30px' }}>
         <Typography style={{ fontSize: 25, marginBlock: '8px' }} color="white">
-          Great News! You're Results Have Been Saved on the History Page. <br /> <b>Result ID: {prop.id}</b>
+          Great News! Your Results Have Been Saved on the History Page. <br /> <b>Result ID: {props.id}</b>
         </Typography>
       </Card> : ''}
 
 
-      {prop.results.map((item, index) => (
+      {props.results.map((item, index) => (
         <Box sx={{ minWidth: 275 }}>
           <br />
           <CardContent>

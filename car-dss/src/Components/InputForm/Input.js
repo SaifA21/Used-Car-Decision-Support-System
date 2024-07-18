@@ -16,6 +16,8 @@ function Input() {
 
   const [loading, setLoading] = React.useState(false);
 
+
+
   const [numberOfRecommendations, setNumberOfRecommendations] = React.useState()
   const [selectedFuel, setSelectedFuel] = React.useState([])
   const [selectedDrivetrain, setSelectedDrivetrain] = React.useState([])
@@ -28,6 +30,12 @@ function Input() {
   const [selectedTrans, setSelectedTrans] = React.useState([])
   const [finalOutput, setFinalOutput] = React.useState([])
   const [id, setId] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!id) {
+      return;
+    }
+  }, [id]);
 
   const fuels = ["Gasoline", "Diesel", "Electric"]
 
@@ -63,7 +71,7 @@ function Input() {
   };
 
   const resultsApiPayload = {
-    "numCars": 1,
+    "numCars": 5,
     "yearRange": "",
     "hpScale": "",
     "style": "",
@@ -218,11 +226,13 @@ function Input() {
       const body = await response.json(); // Correctly awaiting the JSON body
       console.log("API response:", body.id);
 
+      setId(body.id);
+
       return body.id;
 
     } catch (error) {
       console.error("Error during API call:", error.message);
-      throw error; // Rethrow or handle error as needed
+      throw error;
     }
 
   }
@@ -268,11 +278,11 @@ function Input() {
       resultsApiPayload['fuel'] = selectedFuel
 
       for (let i = 1; i <= numberOfRecommendations; i++) {
-        var x = resultsApiPayload[`car${i}`] = results[i - 1].Year +
+        resultsApiPayload[`car${i}`] = results[i - 1].Year +
           " " + results[i - 1].Make + " " + results[i - 1].Model
       }
 
-      setId(await callAddResultsApi())
+      await callAddResultsApi()
       setLoading(false);
 
     } catch (error) {
