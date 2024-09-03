@@ -25,6 +25,7 @@ def process(req: https_fn.Request) -> https_fn.Response:
         Number_of_Doors = data.get('Number of Doors')
         Engine_HP = data.get('Engine HP')
         Year = data.get('Year')
+        Vehicle_Style = data.get('Vehicle Style')
         Highway_Percent = data.get('Highway Percent')
         Vehicle_Size = data.get('Vehicle Size')
         Engine_Fuel_Type = data.get('Engine Fuel Type')

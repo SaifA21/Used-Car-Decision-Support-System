@@ -16,6 +16,8 @@ function Input() {
 
   const [loading, setLoading] = React.useState(false);
 
+
+
   const [numberOfRecommendations, setNumberOfRecommendations] = React.useState()
   const [selectedFuel, setSelectedFuel] = React.useState([])
   const [selectedDrivetrain, setSelectedDrivetrain] = React.useState([])
@@ -28,6 +30,12 @@ function Input() {
   const [selectedTrans, setSelectedTrans] = React.useState([])
   const [finalOutput, setFinalOutput] = React.useState([])
   const [id, setId] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!id) {
+      return;
+    }
+  }, [id]);
 
   const fuels = ["Gasoline", "Diesel", "Electric"]
 
@@ -55,6 +63,7 @@ function Input() {
     "Number of Doors": 0,
     "Engine HP": 0,
     "Year": 0,
+    "Vehicle Style": "",
     "Highway Percent": 0,
     "Vehicle Size": 0,
     "Engine Fuel Type": [],
@@ -63,7 +72,7 @@ function Input() {
   };
 
   const resultsApiPayload = {
-    "numCars": 1,
+    "numCars": 5,
     "yearRange": "",
     "hpScale": "",
     "style": "",
@@ -163,6 +172,7 @@ function Input() {
     apiPayload['Transmission Type'].push(...selectedTrans)
     apiPayload['MSRP'] = desiredPrice
     apiPayload['Highway Percent'] = selectedTimeHighway / 100
+    apiPayload['Vehicle Style'] = selectedStyle[0]
 
     console.log(apiPayload)
   }
@@ -218,11 +228,13 @@ function Input() {
       const body = await response.json(); // Correctly awaiting the JSON body
       console.log("API response:", body.id);
 
+      setId(body.id);
+
       return body.id;
 
     } catch (error) {
       console.error("Error during API call:", error.message);
-      throw error; // Rethrow or handle error as needed
+      throw error;
     }
 
   }
@@ -250,11 +262,24 @@ function Input() {
         HighwayMPG: value[9],
         CityMPG: value[10],
         MSRP: value[11],
-        CombinedMPG: value[12]
+        CombinedMPG: value[12],
+        IsSubmitted: true
       }))
 
+      console.log(results)
 
       await setFinalOutput(results)
+
+      console.log("before")
+      console.log(resultsApiPayload)
+
+      for (let i = 1; i <= numberOfRecommendations; i++) {
+        resultsApiPayload[`car${i}`] = results[i - 1].Year +
+          " " + results[i - 1].Make + " " + results[i - 1].Model
+      }
+
+      console.log("after")
+      console.log(resultsApiPayload)
 
       resultsApiPayload['numCars'] = numberOfRecommendations
       resultsApiPayload['yearRange'] = selectedYear
@@ -267,12 +292,12 @@ function Input() {
       resultsApiPayload['trans'] = selectedTrans
       resultsApiPayload['fuel'] = selectedFuel
 
-      for (let i = 1; i <= numberOfRecommendations; i++) {
-        var x = resultsApiPayload[`car${i}`] = results[i - 1].Year +
-          " " + results[i - 1].Make + " " + results[i - 1].Model
-      }
+
+
+      await callAddResultsApi()
 
       setId(await callAddResultsApi())
+
       setLoading(false);
 
     } catch (error) {
@@ -306,41 +331,41 @@ function Input() {
           <Grid container spacing={2} style={{ marginBlock: '25px' }}>
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                How much do you value having a newer car?
+                How much do you value having a newer car? *
               </Typography>
               <Dropdown label="Year Range" options={year} handle={setSelectedYear} selected={selectedYear}></Dropdown>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                How valuable is a powerful engine in your vehicle?
+                How valuable is a powerful engine in your vehicle? *
               </Typography>
               <Dropdown label="HP" options={engineHP} handle={setSelectedHP} selected={selectedHP}></Dropdown>
             </Grid>
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                What is your preferred vehicle style?
+                What is your preferred vehicle style? *
               </Typography>
               <Dropdown label="Vehicle Style" options={vehicleStyle} handle={setSelectedStyle} selected={selectedStyle}></Dropdown>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                How much do you value good gas mileage in your car?
+                How much do you value good gas mileage in your car? *
               </Typography>
               <Dropdown label="Good Mileage" options={goodMileage} handle={setSelectedMileage} selected={selectedMileage}></Dropdown>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                How much of your driving time as a percentage do you spend on the highway (not in city driving)?
+                How much of your driving time as a percentage do you spend on the highway (not in city driving)? *
               </Typography>
               <DrivingSlider handle={setSelectedTimeHighway}></DrivingSlider>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
               <Typography variant="h6" gutterBottom style={{ marginTop: '2vh' }}>
-                What is the desired price you wish to spend?
+                What is the desired price you wish to spend? *
               </Typography>
               <IntegerInput label="Desired Price Value" handle={setDesiredPrice} selected={desiredPrice}></IntegerInput>
             </Grid>
